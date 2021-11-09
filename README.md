@@ -40,7 +40,7 @@ var css = new flashCSS({
 	important: false // default
 });
 ```
-- ### observe: Boolean ###
+- ### `observe: Boolean` ###
 	If html class has changed which class will be update.
 
 - ### media: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} ) ###
