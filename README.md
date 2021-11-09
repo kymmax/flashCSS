@@ -31,11 +31,11 @@ window.addEventListener("DOMContentLoaded", function () {
 var css = new flashCSS({
 	observe: false, // default
 	media: {
-		xs: 0, // default
-		sm: 576, // default
-		md: 768, // default
-		lg: 992, // default
-		xl: 1280, // default
+	    xs: 0,    // default
+	    sm: 576,  // default
+	    md: 768,  // default
+	    lg: 992,  // default
+	    xl: 1280, // default
 	},
 	important: false // default
 });
@@ -43,10 +43,10 @@ var css = new flashCSS({
 - ### `observe: Boolean` ###
 	If html class has changed which class will be update.
 
-- ### media: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} ) ###
+- ### `media: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} )` ###
 	Related to CSS @media (min-width: px), and just like Bootstrap.
 
-- ### important: Boolean ###
+- ### `important: Boolean` ###
 	Add !important on style.
 
 
