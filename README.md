@@ -41,13 +41,13 @@ var css = new flashCSS({
 });
 ```
 - ### observe: Boolean ###
-If html class has changed which class will be update.
+	If html class has changed which class will be update.
 
-- media: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} )
-Related to CSS @media (min-width: px), and just like Bootstrap.
+- ### media: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} ) ###
+	Related to CSS @media (min-width: px), and just like Bootstrap.
 
-- important: Boolean
-Add !important on style.
+- ### important: Boolean ###
+	Add !important on style.
 
 
 
