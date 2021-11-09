@@ -49,7 +49,9 @@ var css = new flashCSS({
 - ### `important: Boolean` ###
 	Add !important on style.
 
-
+- ### `Style ( class name : style name )` ###
+	Use html snipset to generate CSS style.
+	Currently only supports para on below:
 ```javascript
 {
 	// Size
@@ -93,6 +95,30 @@ var css = new flashCSS({
 	"color": ["color"],
 	"bgc": ["background-color"],
 };
+```
+
+- ### `Symbols` ###
+	Use some snipset to correspond to the symbol, because some symbols can't be class name.
+```javascript
+{
+	"_"   : ".", // dot
+	"neg" : "-", // negative
+	"per" : "%", // percent
+	"hash": "#", // color hash code
+}
+```
+```
+	// width: 50%;
+	<div class="w-50per"></div>
+	
+	// width: 50.6%;
+	<div class="w-50_6per"></div>
+	
+	// margin-top: -1rem;
+	<div class="mt-neg1rem"></div>
+	
+	// background-color: #fff000;
+	<div class="bgc-hashfff000"></div>
 ```
 
 
