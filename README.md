@@ -2,6 +2,17 @@
 A quick way to customize css from html class name.
 
 
+### Features
+
+
+### How to Use?
+
+```
+<script src="assets/js/flashCSS-1.0.0.js"></script>
+```
+
+### Parameters
+
 
 ```javascript
 import * as THREE from './js/three.module.js';
