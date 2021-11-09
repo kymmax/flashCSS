@@ -15,7 +15,7 @@ A quick way to customize css from html class name.
 - Execute function when document ready.
 ```javascript
 window.addEventListener("DOMContentLoaded", function () {
-	var css = new flashCSS();
+    var css = new flashCSS();
 });
 ```
 
@@ -29,28 +29,71 @@ window.addEventListener("DOMContentLoaded", function () {
 
 ```javascript
 var css = new flashCSS({
-	observe: false, // default
-	media: {
-	    xs: 0,    // default
-	    sm: 576,  // default
-	    md: 768,  // default
-	    lg: 992,  // default
-	    xl: 1280, // default
-	},
-	important: false // default
+    observe: false, // default
+    media: {
+        xs: 0,    // default
+        sm: 576,  // default
+        md: 768,  // default
+        lg: 992,  // default
+        xl: 1280, // default
+    },
+    important: false // default
 });
 ```
 - ### `observe: Boolean` ###
 	If html class has changed which class will be update.
 
 - ### `media: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} )` ###
-	Related to CSS @media (min-width: px), and just like Bootstrap.
+	Related to CSS @media (min-width: px), and value just like Bootstrap.
 
 - ### `important: Boolean` ###
 	Add !important on style.
 
 
-
+```javascript
+{
+	// Size
+	"w" : ["width"],
+	"h" : ["height"],
+	"maxw" : ["max-width"],
+	"minw" : ["min-width"],
+	"maxh" : ["max-height"],
+	"minh" : ["min-height"],
+	"wh": ["width","height"],
+	// Padding
+	"p" : ["padding"],
+	"pr": ["padding-right"],
+	"pl": ["padding-left"],
+	"pt": ["padding-top"],
+	"pb": ["padding-bottom"],
+	"px": ["padding-left", "padding-right"],
+	"py": ["padding-top", "padding-bottom"],
+	// Margin
+	"m" : ["margin"],
+	"mr": ["margin-right"],
+	"ml": ["margin-left"],
+	"mt": ["margin-top"],
+	"mb": ["margin-bottom"],
+	"mx": ["margin-left", "margin-right"],
+	"my": ["margin-top", "margin-bottom"],
+	// Absolute
+	"at": ["top"],
+	"ab": ["bottom"],
+	"al": ["left"],
+	"ar": ["right"],
+	// Font
+	"fz": ["font-size"],
+	"fl": ["letter-spacing"],
+	"fh": ["line-height"],
+	"fa": ["text-align"],
+	// Border
+	"border": ["border-width"],
+	"round": ["border-radius"],
+	// Color
+	"color": ["color"],
+	"bgc": ["background-color"],
+};
+```
 
 
 
