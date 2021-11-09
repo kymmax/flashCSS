@@ -107,7 +107,7 @@ var css = new flashCSS({
 	"hash": "#", // color hash code
 }
 ```
-```
+```html
 	// width: 50%;
 	<div class="w-50per"></div>
 	
