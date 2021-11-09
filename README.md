@@ -3,30 +3,30 @@ A quick way to customize css from html class name.
 
 
 ## Features
-
+- Fast to develop website.
+- More freedom to use.
+- Compress JS size ~2kb only.
 
 ## How to Use?
-
-- Add js on your html.
+1. Add js on your html.
 ```html
 <script src="assets/js/flashCSS-1.0.0.min.js"></script>
 ```
 
-- Execute function when document ready.
+2. Execute function when document ready.
 ```javascript
 window.addEventListener("DOMContentLoaded", function () {
     var css = new flashCSS();
 });
 ```
 
-- Start your project!
+3. Start your project!
 (width: 25%; height: 200px; margin-top: 1rem; background-color: black)
 ```html
-<div class="w-25per h-200px mt-1rem bgc-black">123</div>
+<div class="w-25per h-200px mt-1rem bgc-black"></div>
 ```
 
 ## Parameters
-
 ```javascript
 var css = new flashCSS({
     observe: false, // default
@@ -47,7 +47,7 @@ var css = new flashCSS({
 	Related to CSS @media (min-width: px), and value just like Bootstrap.
 
 - ### `important: Boolean` ###
-	Add !important on style.
+	Add `!important` on style.
 
 - ### `Style ( class name : style name )` ###
 	Use html snipset to generate CSS style.
@@ -57,11 +57,11 @@ var css = new flashCSS({
 	// Size
 	"w" : ["width"],
 	"h" : ["height"],
-	"maxw" : ["max-width"],
-	"minw" : ["min-width"],
-	"maxh" : ["max-height"],
-	"minh" : ["min-height"],
 	"wh": ["width","height"],
+	"maxw": ["max-width"],
+	"minw": ["min-width"],
+	"maxh": ["max-height"],
+	"minh": ["min-height"],
 	// Padding
 	"p" : ["padding"],
 	"pr": ["padding-right"],
@@ -90,10 +90,10 @@ var css = new flashCSS({
 	"fa": ["text-align"],
 	// Border
 	"border": ["border-width"],
-	"round": ["border-radius"],
+	"round ": ["border-radius"],
 	// Color
 	"color": ["color"],
-	"bgc": ["background-color"],
+	"bgc"  : ["background-color"],
 };
 ```
 
@@ -108,20 +108,26 @@ var css = new flashCSS({
 }
 ```
 ```html
-	// width: 50%;
-	<div class="w-50per"></div>
+// width: 50%;
+<div class="w-50per"></div>
 
-	// width: 50.5px;
-	<div class="w-50_5px"></div>
+// width: 50.5px;
+<div class="w-50_5px"></div>
 
-	// margin-top: -1rem;
-	<div class="mt-neg1rem"></div>
+// margin-top: -1rem;
+<div class="mt-neg1rem"></div>
 
-	// background-color: #fff000;
-	<div class="bgc-hashfff000"></div>
+// background-color: #fff000;
+<div class="bgc-hashfff000"></div>
 ```
 
+- ### `init()` ###
+You can use `init()` to re-check whole html class name to generate css style.
 
+```javascript
+var css = new flashCSS();
+    css.init();
+```
 
 
 
