@@ -7,7 +7,7 @@ A quick way to customize css from html class name.
 
 ### How to Use?
 
-```
+```html
 <script src="assets/js/flashCSS-1.0.0.js"></script>
 ```
 
