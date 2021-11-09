@@ -6,6 +6,7 @@ A quick way to customize css from html class name.
 
 
 ### How to Use?
+========
 - Add js on your html.
 ```html
 <script src="assets/js/flashCSS-1.0.0.min.js"></script>
