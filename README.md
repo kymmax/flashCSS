@@ -110,13 +110,13 @@ var css = new flashCSS({
 ```html
 	// width: 50%;
 	<div class="w-50per"></div>
-	
-	// width: 50.6%;
-	<div class="w-50_6per"></div>
-	
+
+	// width: 50.5px;
+	<div class="w-50_5px"></div>
+
 	// margin-top: -1rem;
 	<div class="mt-neg1rem"></div>
-	
+
 	// background-color: #fff000;
 	<div class="bgc-hashfff000"></div>
 ```
