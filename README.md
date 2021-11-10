@@ -5,7 +5,8 @@ A quick way to customize css from html class name.
 ## Features
 - Fast to develop website.
 - More freedom to use.
-- Compress JS size ~2kb only.
+- Create CSS style from html class name.
+- Min size ~2 kb only.
 
 ## How to Use?
 1. Add js on your html.
@@ -128,6 +129,12 @@ You can use `init()` to re-check whole html class name to generate css style.
 var css = new flashCSS();
     css.init();
 ```
+
+
+
+
+
+
 
 
 
