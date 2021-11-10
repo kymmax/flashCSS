@@ -6,7 +6,7 @@ A quick way to customize css from html class name.
 - Fast to develop website.
 - More freedom to use.
 - Create CSS style from html class name.
-- Min size ~2 kb only.
+- Min size ~2  only.
 
 ## How to Use?
 1. Add js on your html.
