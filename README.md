@@ -55,14 +55,21 @@ var css = new flashCSS({
 	Currently only supports para on below:
 ```javascript
 {
+	// Display
+	"d": ["display"],
+	"justifyContent": ["justify-content"],
+	"alignItems": ["align-items"],
+	"alignSelf": ["align-self"],
+	"flexWrap": ["flex-wrap"],
+	"order": ["order"],
 	// Size
 	"w" : ["width"],
 	"h" : ["height"],
 	"wh": ["width","height"],
-	"maxw": ["max-width"],
-	"minw": ["min-width"],
-	"maxh": ["max-height"],
-	"minh": ["min-height"],
+	"maxw" : ["max-width"],
+	"minw" : ["min-width"],
+	"maxh" : ["max-height"],
+	"minh" : ["min-height"],
 	// Padding
 	"p" : ["padding"],
 	"pr": ["padding-right"],
@@ -90,11 +97,17 @@ var css = new flashCSS({
 	"fh": ["line-height"],
 	"fa": ["text-align"],
 	// Border
-	"border": ["border-width"],
-	"round ": ["border-radius"],
+	"bw": ["border-width"],
+	"bc": ["border-color"],
+	"bs": ["border-style"],
+	"round": ["border-radius"],
 	// Color
 	"color": ["color"],
-	"bgc"  : ["background-color"],
+	"bg": ["background"],
+	"bgc": ["background-color"],
+	// Others
+	"o": ["opacity"],
+	"z": ["z-index"],
 };
 ```
 

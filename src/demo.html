@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Web Title -->
+    <title>flashCSS Demo</title>
+
+    <!-- Prevent google translate -->
+    <meta content="en" http-equiv="Content-Language">
+
+    <!-- Web base -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+
+    <!-- Web info -->
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!-- FB thumbnail -->
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="">
+    <meta property="og:site_name" content="">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/thumbnail.png">
+
+    <!-- CSS -->
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        *{
+            box-sizing: border-box;
+            transition: all 0.5s;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Stat Main -->
+    <div class="wrapper">
+
+        <div class="demo-block w-100vw h-100vh d-flex flexDir-column justifyContent-center">
+            <div id="demo_1" class="w-100per bg-black">
+                <div class="w-100per">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste sed pariatur, debitis provident officiis maxime voluptates exercitationem esse error, saepe unde beatae numquam eius blanditiis sequi quae dolore at libero doloribus sunt, illo eligendi maiores vel? Maiores, culpa alias magni at ea fugit deserunt ipsam explicabo error commodi perferendis.</div>
+            </div>
+            <p id="demo_1_p" class="fz-12px fz-md-24px fa-center">w-100per bg-black mx-auto</p>
+        </div>
+
+        <hr>
+
+
+
+    </div>
+    <!-- End Main -->
+
+
+    <!-- Start JS -->
+    <script src="assets/js/flashCSS-1.0.0.js"></script>
+    <script>
+
+        window.addEventListener("DOMContentLoaded", function () {
+            // INIT flashCSS
+            var css = new flashCSS({observe: true});
+
+            // DEMO
+            function _(ID){
+                return document.getElementById(ID);
+            }
+            var demo_count = 1;
+            var demo = [
+                "w-100per bg-black",
+                "w-80per bg-black",
+                "w-80per bg-black mx-auto",
+                "w-80per bg-hashfff000 mx-auto",
+                "w-80per bg-hashfff000 mx-auto o-0dot5",
+                "w-80per bg-hashfff000 mx-auto o-1 fz-18px",
+                "w-80per bg-hashfff000 mx-auto o-1 fz-18px p-2rem",
+                "w-80per bg-hashfff000 mx-auto o-1 fz-18px p-2rem fl-0dot2em",
+                "w-80per bg-hashfff000 mx-auto o-1 fz-18px p-2rem fl-0dot2em round-2rem br-4px_solid_red",
+            ]
+
+            setInterval(function() {
+                _("demo_1").setAttribute("class",demo[demo_count]);
+                _("demo_1_p").innerHTML = demo[demo_count];
+                demo_count++;
+                if(demo_count >= demo.length) demo_count = 0;
+            }, 2000);
+
+        });
+    </script>
+    <!-- End JS -->
+</body>
+
+</html>

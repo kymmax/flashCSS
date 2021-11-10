@@ -1,29 +1,13 @@
 /*!
  * flashCSS 1.0.0
  * 2021-11-10
- * https://xxxxx.com
+ * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2021, flashCSS. All rights reserved.
  * @author: Jason Kuo, kymmax0420@gmail.com
  * 
  * Licensed MIT
  */
-
-var css;
-
-window.addEventListener("DOMContentLoaded", function () {
-	var css = new flashCSS({
-		observe: true, // default
-		media: {
-			xs: 0, // default
-			sm: 576, // default
-			md: 768, // default
-			lg: 992, // default
-			xl: 1280, // default
-		},
-		important: false // default
-	});
-});
 
 function flashCSS( PARA = {} ) {
 
@@ -45,6 +29,14 @@ function flashCSS( PARA = {} ) {
 	};
 	// Style Para
 	var _para_spacing = {
+		// Display
+		"d": ["display"],
+		"flexDir": ["flex-direction"],
+		"justifyContent": ["justify-content"],
+		"alignItems": ["align-items"],
+		"alignSelf": ["align-self"],
+		"flexWrap": ["flex-wrap"],
+		"order": ["order"],
 		// Size
 		"w" : ["width"],
 		"h" : ["height"],
@@ -80,6 +72,7 @@ function flashCSS( PARA = {} ) {
 		"fh": ["line-height"],
 		"fa": ["text-align"],
 		// Border
+		"br": ["border"],
 		"bw": ["border-width"],
 		"bc": ["border-color"],
 		"bs": ["border-style"],
@@ -88,13 +81,17 @@ function flashCSS( PARA = {} ) {
 		"color": ["color"],
 		"bg": ["background"],
 		"bgc": ["background-color"],
+		// Others
+		"o": ["opacity"],
+		"z": ["z-index"],
 	};
 	// Symbol Para
 	var _para_symbol = {
-		"_"   : ".", // dot
-		"neg" : "-",	// negative
+		"dot"   : ".", // dot
+		"neg" : "-", // negative
 		"per" : "%", // percent
 		"hash": "#", // color hash code
+		"_"  : " " // space
 	}
 	// Initial
 	this.init = function(){
@@ -131,11 +128,29 @@ function flashCSS( PARA = {} ) {
 						})
 	
 						if (i.indexOf(_check_string) == 0 && !_value_class.includes("-") && !_class_record_skip) {
-	
+							
+							// Check Camel-Case
+							var _value_split = _value.split(/(?=[A-Z])/);
+							_value_split.forEach(function(text,index){
+								if(index > 0){
+									_value += "-" + text.toLowerCase();
+								}else{
+									_value = text;
+								}
+							})
+
 							// Symbol Replace ( dot / percent )
 							Object.keys(_para_symbol).forEach(function (symbol) {
 								if (_value_class.includes(symbol)) {
-									_value = _value.replace(symbol, _para_symbol[symbol]);
+
+									_value.split(symbol).forEach(function(string,index){
+										if(index > 0){
+											_value += _para_symbol[symbol] + string;
+										}else{
+											_value = string;
+										}
+									})
+									// _value = _value.replaceAll(symbol, _para_symbol[symbol]);
 								}
 							})
 	
@@ -150,12 +165,12 @@ function flashCSS( PARA = {} ) {
 							if (media != "") {
 								_style_list += '@media (min-width:' + _para_media[media] + ') {.' + _class_string_merge + '{' + _string_group + '}} ';
 							}
-							// Without
+							// Without Media String
 							else {
 								_style_list += '.' + _class_string_merge + '{' + _string_group + '} ';
 							}
 	
-							// Record Class NAme
+							// Record Class Name
 							_class_record.push(_class_string_merge);
 	
 							return
