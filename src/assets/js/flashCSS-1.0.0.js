@@ -88,6 +88,7 @@ function flashCSS( PARA = {} ) {
 		"bg"   : ["background"],
 		"bgc"  : ["background-color"],
 		// Others
+		"trans": ["transition"],
 		"o": ["opacity"],
 		"z": ["z-index"],
 	};
@@ -97,8 +98,10 @@ function flashCSS( PARA = {} ) {
 		"neg" : "-", // negative
 		"per" : "%", // percent
 		"hash": "#", // color hash code
-		"plus": ",", // comma
 		"_"   : " ", // space
+		"plus": ",", // comma
+		"rgba": "rgba(", // rgba
+		"br": ")", // bracket right for rgba
 	}
 	// Initial
 	this.init = function(){
@@ -146,13 +149,27 @@ function flashCSS( PARA = {} ) {
 								}
 							})
 
-							// Symbol Replace ( dot / percent )
+							// Symbol Replace ( dot / negative / percent / etc. )
 							Object.keys(_para_symbol).forEach(function (symbol) {
 								if (_value_class.includes(symbol)) {
-
 									_value.split(symbol).forEach(function(string,index){
 										if(index > 0){
+
+											if(symbol == "rgba"){
+												var _hash ="";
+												if(string.includes("hash")){_hash = "hash"};
+												if(string.includes("#")){_hash = "#"};
+												
+												if(_hash.length != 0){
+													var _hex = string.substring(_hash.length,_hash.length+6)
+													var _rgb = _self.hexToRgb("#" + _hex);
+	
+													string = string.replace("#" + _hex, _rgb.r + "," + _rgb.g + "," + _rgb.b )
+												}
+											}
+
 											_value += _para_symbol[symbol] + string;
+
 										}else{
 											_value = string;
 										}
@@ -225,6 +242,16 @@ function flashCSS( PARA = {} ) {
 
 	if (PARA && PARA.observe) {
 		this.observer();
+	}
+
+	// Hex to RGB
+	this.hexToRgb = function( HEX ){
+		var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec( HEX );
+		return result ? {
+			r: parseInt(result[1], 16),
+			g: parseInt(result[2], 16),
+			b: parseInt(result[3], 16)
+		} : null;
 	}
 
 	this.init();

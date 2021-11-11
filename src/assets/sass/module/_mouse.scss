@@ -1,0 +1,29 @@
+
+/////////////////////////////////////////////////////////////
+
+#cursor-mouse {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 50vw;
+    // border: 2px solid rgba(#03a0e9, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    border: 10px solid rgba(#ff3f1b,1);
+    // background-color: rgba(#ff3f1b,1);
+    mix-blend-mode: difference;
+    z-index: 999999999999;
+    opacity: 0;
+    transition: width 0.5s, height 0.5s, opacity 0.5s, background-color 0.5s !important;
+    &.init {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+    &.active {
+        width: 60px;
+        height: 60px;
+    }
+}

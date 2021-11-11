@@ -30,6 +30,7 @@ window.addEventListener("DOMContentLoaded", function () {
 (width: 25%; height: 200px; margin-top: 1rem; background-color: black)
 ```html
 <div class="w-25per h-200px mt-1rem bgc-black"></div>
+<div class="d-flex alignItems-flexStart"></div>
 ```
 
 ## Parameters
@@ -122,6 +123,7 @@ var css = new flashCSS({
 	"bg": ["background"],
 	"bgc": ["background-color"],
 	// Others
+	"trans": ["transition"],
 	"o": ["opacity"],
 	"z": ["z-index"],
 };
@@ -136,7 +138,9 @@ var css = new flashCSS({
 	"per" : "%", // percent
 	"hash": "#", // color hash code
 	"_"   : " ", // space
-	"plus"  : ",", // comma
+	"plus": ",", // comma
+	"rgba": "rgba(", // rgba
+	"br": ")", // bracket right for rgba
 }
 ```
 ```html
@@ -175,6 +179,17 @@ var css = new flashCSS({
     <div class="sdt-0_0_redplus_0_0_blue"></div>
     <div class="sdt-0_0_red_plus0_0_blue"></div>
     <div class="sdt-0_0_redplus0_0_blue"></div>
+
+## RGBA
+	// background-color: rgba(0,0,0,1);
+	<!-- rgba
+		 hash000000: "#" + 000000 (6 characters)
+		 plus: "," 
+		 1: alpha value
+		 br: ")"
+	-->
+	<div class="bgc-rgbahash000000plus1br"></div>
+
 ```
 
 - ### `init()` ###
