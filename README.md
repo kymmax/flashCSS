@@ -1,12 +1,17 @@
 # flashCSS
 A quick way to customize css from html class name.
 
+DEMO
+```html
+<div class="d-flex ps-fixed fw-bold fl-dot1em fz-16px fz-lg-20px p-1dot5rem"></div>
+```
 
 ## Features
+- Create CSS style from html class name.
 - Fast to develop website.
 - More freedom to use.
-- Create CSS style from html class name.
-- Min size ~2 KB only.
+- Min JS size `~3 KB` only.
+- Save more CSS file size.
 
 ## How to Use?
 1. Add js on your html.
@@ -112,7 +117,7 @@ var css = new flashCSS({
 	// Shadow
 	"sdb": ["box-shadow"],
 	"sdt": ["text-shadow"],
-	// Color
+	// Color (can't use rgba case)
 	"color": ["color"],
 	"bg": ["background"],
 	"bgc": ["background-color"],
