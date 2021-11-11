@@ -6,7 +6,7 @@ A quick way to customize css from html class name.
 - Fast to develop website.
 - More freedom to use.
 - Create CSS style from html class name.
-- Min size ~2  only.
+- Min size ~2 KB only.
 
 ## How to Use?
 1. Add js on your html.
@@ -33,10 +33,10 @@ var css = new flashCSS({
     observe: false, // default
     media: {
         xs: 0,    // default
-        sm: 576,  // default
-        md: 768,  // default
-        lg: 992,  // default
-        xl: 1280, // default
+	sm: 576,  // default
+	md: 768,  // default
+	lg: 992,  // default
+	xl: 1280, // default
     },
     important: false // default
 });
@@ -46,9 +46,12 @@ var css = new flashCSS({
 
 - ### `media: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} )` ###
 	Related to CSS @media (min-width: px), and value just like Bootstrap.
+```html
+<div class="fz-16px fz-lg-20px my-1rem my-lg-1dot5rem"></div>
+```
 
 - ### `important: Boolean` ###
-	Add `!important` on style.
+	Add `!important` on all style.
 
 - ### `Style ( class name : style name )` ###
 	Use html snipset to generate CSS style.
@@ -127,22 +130,46 @@ var css = new flashCSS({
 	"neg" : "-", // negative
 	"per" : "%", // percent
 	"hash": "#", // color hash code
-	"and"  : ",", // comma
 	"_"   : " ", // space
+	"plus"  : ",", // comma
 }
 ```
 ```html
-// width: 50%;
-<div class="w-50per"></div>
+## Dot
+    // width: 50.5px;
+    <div class="w-50dot5px"></div>
 
-// width: 50.5px;
-<div class="w-50_5px"></div>
+    // letter-spacing: 0.15em;
+    <div class="fl-dot15em"></div>
 
-// margin-top: -1rem;
-<div class="mt-neg1rem"></div>
+## Negative
+    // margin-top: -1rem;
+    <div class="mt-neg1rem"></div>
 
-// background-color: #fff000;
-<div class="bgc-hashfff000"></div>
+## Percent
+    // width: 50%;
+    <div class="w-50per"></div>
+
+## Color Hash Code
+    // background-color: #fff000;
+    <div class="bgc-hashfff000"></div>
+
+## Space
+    // text-shadow: 0 0 red;
+    <div class="sdt-0_0_red"></div>
+
+    // padding: 16px 20px 10px 5px;
+    <div class="p-16px_20px_10px_5px"></div>
+
+    // margin: 1rem 2rem;
+    <div class="m-1rem_2rem"></div>
+
+## Comma
+    // text-shadow: 0 0 red, 0 0 blue;
+    <div class="sdt-0_0_red_plus_0_0_blue"></div>
+    <div class="sdt-0_0_redplus_0_0_blue"></div>
+    <div class="sdt-0_0_red_plus0_0_blue"></div>
+    <div class="sdt-0_0_redplus0_0_blue"></div>
 ```
 
 - ### `init()` ###
