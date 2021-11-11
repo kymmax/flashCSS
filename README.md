@@ -57,11 +57,14 @@ var css = new flashCSS({
 {
 	// Display
 	"d": ["display"],
+	"flexDir": ["flex-direction"],
 	"justifyContent": ["justify-content"],
 	"alignItems": ["align-items"],
 	"alignSelf": ["align-self"],
 	"flexWrap": ["flex-wrap"],
 	"order": ["order"],
+	// Position
+	"ps": ["position"],
 	// Size
 	"w" : ["width"],
 	"h" : ["height"],
@@ -96,11 +99,16 @@ var css = new flashCSS({
 	"fl": ["letter-spacing"],
 	"fh": ["line-height"],
 	"fa": ["text-align"],
+	"fw": ["font-weight"],
 	// Border
+	"br": ["border"],
 	"bw": ["border-width"],
 	"bc": ["border-color"],
 	"bs": ["border-style"],
 	"round": ["border-radius"],
+	// Shadow
+	"sdb": ["box-shadow"],
+	"sdt": ["text-shadow"],
 	// Color
 	"color": ["color"],
 	"bg": ["background"],
@@ -115,10 +123,12 @@ var css = new flashCSS({
 	Use some snipset to correspond to the symbol, because some symbols can't be class name.
 ```javascript
 {
-	"_"   : ".", // dot
+	"dot" : ".", // dot
 	"neg" : "-", // negative
 	"per" : "%", // percent
 	"hash": "#", // color hash code
+	"and"  : ",", // comma
+	"_"   : " ", // space
 }
 ```
 ```html

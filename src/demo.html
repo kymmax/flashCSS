@@ -49,10 +49,10 @@
     <div class="wrapper">
 
         <div class="demo-block w-100vw h-100vh d-flex flexDir-column justifyContent-center">
-            <div id="demo_1" class="w-100per bg-black">
+            <div id="demo_1" class="w-100per bg-gray">
                 <div class="w-100per">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste sed pariatur, debitis provident officiis maxime voluptates exercitationem esse error, saepe unde beatae numquam eius blanditiis sequi quae dolore at libero doloribus sunt, illo eligendi maiores vel? Maiores, culpa alias magni at ea fugit deserunt ipsam explicabo error commodi perferendis.</div>
             </div>
-            <p id="demo_1_p" class="fz-12px fz-md-24px fa-center">w-100per bg-black mx-auto</p>
+            <p id="demo_1_p" class="fz-12px fz-md-24px fa-center">w-100per bg-gray mx-auto</p>
         </div>
 
         <hr>
@@ -77,23 +77,23 @@
             }
             var demo_count = 1;
             var demo = [
-                "w-100per bg-black",
-                "w-80per bg-black",
-                "w-80per bg-black mx-auto",
-                "w-80per bg-hashfff000 mx-auto",
-                "w-80per bg-hashfff000 mx-auto o-0dot5",
-                "w-80per bg-hashfff000 mx-auto o-1 fz-18px",
-                "w-80per bg-hashfff000 mx-auto o-1 fz-18px p-2rem",
-                "w-80per bg-hashfff000 mx-auto o-1 fz-18px p-2rem fl-0dot2em",
-                "w-80per bg-hashfff000 mx-auto o-1 fz-18px p-2rem fl-0dot2em round-2rem br-4px_solid_red",
+                "w-100per bg-gray",
+                "w-80per bg-gray",
+                "w-80per bg-gray mx-auto",
+                "w-80per bg-hashffb72c mx-auto",
+                "w-80per bg-hashffb72c mx-auto o-0dot5",
+                "w-80per bg-hashffb72c mx-auto o-1 fz-18px",
+                "w-80per bg-hashffb72c mx-auto o-1 fz-18px p-2rem",
+                "w-80per bg-hashffb72c mx-auto o-1 fz-18px p-2rem fl-0dot1em",
+                "w-80per bg-hashffb72c mx-auto o-1 fz-18px p-2rem fl-0dot1em round-2rem br-4px_solid_red",
             ]
 
-            setInterval(function() {
-                _("demo_1").setAttribute("class",demo[demo_count]);
-                _("demo_1_p").innerHTML = demo[demo_count];
-                demo_count++;
-                if(demo_count >= demo.length) demo_count = 0;
-            }, 2000);
+            // setInterval(function() {
+            //     _("demo_1").setAttribute("class",demo[demo_count]);
+            //     _("demo_1_p").innerHTML = demo[demo_count];
+            //     demo_count++;
+            //     if(demo_count >= demo.length) demo_count = 0;
+            // }, 2000);
 
         });
     </script>

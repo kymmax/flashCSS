@@ -37,6 +37,8 @@ function flashCSS( PARA = {} ) {
 		"alignSelf": ["align-self"],
 		"flexWrap": ["flex-wrap"],
 		"order": ["order"],
+		// Position
+		"ps": ["position"],
 		// Size
 		"w" : ["width"],
 		"h" : ["height"],
@@ -71,12 +73,16 @@ function flashCSS( PARA = {} ) {
 		"fl": ["letter-spacing"],
 		"fh": ["line-height"],
 		"fa": ["text-align"],
+		"fw": ["font-weight"],
 		// Border
 		"br": ["border"],
 		"bw": ["border-width"],
 		"bc": ["border-color"],
 		"bs": ["border-style"],
 		"round": ["border-radius"],
+		// Shadow
+		"sdb": ["box-shadow"],
+		"sdt": ["text-shadow"],
 		// Color
 		"color": ["color"],
 		"bg": ["background"],
@@ -87,11 +93,12 @@ function flashCSS( PARA = {} ) {
 	};
 	// Symbol Para
 	var _para_symbol = {
-		"dot"   : ".", // dot
+		"dot" : ".", // dot
 		"neg" : "-", // negative
 		"per" : "%", // percent
 		"hash": "#", // color hash code
-		"_"  : " " // space
+		"and"  : ",", // comma
+		"_"   : " ", // space
 	}
 	// Initial
 	this.init = function(){
