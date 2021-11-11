@@ -97,7 +97,7 @@ function flashCSS( PARA = {} ) {
 		"neg" : "-", // negative
 		"per" : "%", // percent
 		"hash": "#", // color hash code
-		"and"  : ",", // comma
+		"plus"  : ",", // comma
 		"_"   : " ", // space
 	}
 	// Initial
