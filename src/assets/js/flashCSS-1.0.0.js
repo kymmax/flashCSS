@@ -85,8 +85,8 @@ function flashCSS( PARA = {} ) {
 		"sdt": ["text-shadow"],
 		// Color
 		"color": ["color"],
-		"bg": ["background"],
-		"bgc": ["background-color"],
+		"bg"   : ["background"],
+		"bgc"  : ["background-color"],
 		// Others
 		"o": ["opacity"],
 		"z": ["z-index"],
@@ -97,7 +97,7 @@ function flashCSS( PARA = {} ) {
 		"neg" : "-", // negative
 		"per" : "%", // percent
 		"hash": "#", // color hash code
-		"plus"  : ",", // comma
+		"plus": ",", // comma
 		"_"   : " ", // space
 	}
 	// Initial

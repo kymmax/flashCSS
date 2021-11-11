@@ -88,12 +88,12 @@
                 "w-80per bg-hashffb72c mx-auto o-1 fz-18px p-2rem fl-0dot1em round-2rem br-4px_solid_red",
             ]
 
-            // setInterval(function() {
-            //     _("demo_1").setAttribute("class",demo[demo_count]);
-            //     _("demo_1_p").innerHTML = demo[demo_count];
-            //     demo_count++;
-            //     if(demo_count >= demo.length) demo_count = 0;
-            // }, 2000);
+            setInterval(function() {
+                _("demo_1").setAttribute("class",demo[demo_count]);
+                _("demo_1_p").innerHTML = demo[demo_count];
+                demo_count++;
+                if(demo_count >= demo.length) demo_count = 0;
+            }, 2000);
 
         });
     </script>
