@@ -1,6 +1,6 @@
 /*!
  * flashCSS 1.0.0
- * 2021-11-10
+ * 2021-11-11
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2021, flashCSS. All rights reserved.
