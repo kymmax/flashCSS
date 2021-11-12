@@ -181,14 +181,14 @@ var css = new flashCSS({
     <div class="sdt-0_0_redplus0_0_blue"></div>
 
 ## RGBA
-	// background-color: rgba(0,0,0,1);
-	<!-- rgba
-		 hash000000: "#" + 000000 (6 characters)
-		 plus: "," 
-		 1: alpha value
-		 br: ")"
-	-->
-	<div class="bgc-rgbahash000000plus1br"></div>
+    // background-color: rgba(0,0,0,1);
+    <!-- rgba
+	 hash000000: "#" + 000000 (6 characters)
+	 plus: "," 
+	 1: alpha value
+	 br: ")"
+    -->
+    <div class="bgc-rgbahash000000plus1br"></div>
 
 ```
 
