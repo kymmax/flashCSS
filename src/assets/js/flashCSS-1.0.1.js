@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.0.0
- * 2021-11-11
+ * flashCSS 1.0.1
+ * 2021-11-26
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2021, flashCSS. All rights reserved.
@@ -9,7 +9,27 @@
  * Licensed MIT
  */
 
-function flashCSS( PARA = {} ) {
+// ## Fix IE
+if (window.NodeList && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = Array.prototype.forEach;
+}
+if (!String.prototype.includes) {
+    String.prototype.includes = function() {
+        'use strict';
+        return String.prototype.indexOf.apply(this, arguments) !== -1;
+    };
+}
+if (!('remove' in Element.prototype)) {
+    Element.prototype.remove = function() {
+        if (this.parentNode) {
+            this.parentNode.removeChild(this);
+        }
+    };
+}
+
+function flashCSS( PARA ) {
+
+	!PARA ? PARA = {} : PARA;
 
 	var _self = this;
 	var _media = PARA.media || {
