@@ -10,7 +10,7 @@ A quick way to customize css from html class name.
 - Create CSS style from html class name.
 - Fast to develop website.
 - More freedom to use.
-- Min JS size `~3 KB` only.
+- Min JS size `~4 KB` only.
 - Save more CSS file size.
 
 ## How to Use?
