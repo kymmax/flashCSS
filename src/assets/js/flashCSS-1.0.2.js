@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.0.1
- * 2021-11-26
+ * flashCSS 1.0.2
+ * 2021-12-03
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2021, flashCSS. All rights reserved.
@@ -39,7 +39,7 @@ function flashCSS( PARA ) {
 		xl: 1280,
 	};
 
-	// Media Query
+	// Media Query for Size
 	var _para_media = {
 		xs: 0 + "px", // default
 		sm: _media.sm + "px",
@@ -47,6 +47,7 @@ function flashCSS( PARA ) {
 		lg: _media.lg + "px",
 		xl: _media.xl + "px",
 	};
+
 	// Style Para
 	var _para_spacing = {
 		// Display
@@ -128,6 +129,13 @@ function flashCSS( PARA ) {
 
 		var _style_list = "";
 		var _class_record = [];
+		var _group_media = {
+				xs: "",
+				sm: "",
+				md: "",
+				lg: "",
+				xl: "",
+			}
 
 		document.querySelectorAll("[class]").forEach(function (index) {
 
@@ -207,7 +215,7 @@ function flashCSS( PARA ) {
 	
 							// With Media String
 							if (media != "") {
-								_style_list += '@media (min-width:' + _para_media[media] + ') {.' + _class_string_merge + '{' + _string_group + '}} ';
+								_group_media[media] += '.' + _class_string_merge + '{' + _string_group + '}';
 							}
 							// Without Media String
 							else {
@@ -223,6 +231,11 @@ function flashCSS( PARA ) {
 				})
 			});
 	
+		})
+
+		// Add & Order Media Style
+		Object.keys(_group_media).forEach(function(media){
+			_style_list += '@media (min-width:' + _para_media[media] + ') {' + _group_media[media] + '} ';
 		})
 	
 		// Set Style Tag
