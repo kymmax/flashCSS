@@ -123,7 +123,7 @@ var css = new flashCSS({
 	// Shadow
 	"sdb": ["box-shadow"],
 	"sdt": ["text-shadow"],
-	// Color (can't use rgba case)
+	// Color
 	"color": ["color"],
 	"bg": ["background"],
 	"bgc": ["background-color"],
