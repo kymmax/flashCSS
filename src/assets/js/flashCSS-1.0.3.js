@@ -1,9 +1,9 @@
 /*!
- * flashCSS 1.0.2
- * 2021-12-03
+ * flashCSS 1.0.3
+ * 2022-01-06
  * https://github.com/kymmax/flashCSS
  * 
- * @license Copyright 2021, flashCSS. All rights reserved.
+ * @license Copyright 2022, flashCSS. All rights reserved.
  * @author: Jason Kuo, kymmax0420@gmail.com
  * 
  * Licensed MIT
@@ -56,6 +56,7 @@ function flashCSS( PARA ) {
 		"justifyContent": ["justify-content"],
 		"alignItems": ["align-items"],
 		"alignSelf": ["align-self"],
+		"justifyAlign": ["justify-content","align-items"], // NEW
 		"flexWrap": ["flex-wrap"],
 		"order": ["order"],
 		// Position
@@ -68,6 +69,10 @@ function flashCSS( PARA ) {
 		"minw" : ["min-width"],
 		"maxh" : ["max-height"],
 		"minh" : ["min-height"],
+		// Grid
+		"colCount": ["column-count"], // NEW
+		"colGap": ["column-gap"], // NEW
+		"colSpan": ["column-span"], // NEW
 		// Padding
 		"p" : ["padding"],
 		"pr": ["padding-right"],
@@ -111,6 +116,9 @@ function flashCSS( PARA ) {
 		// Others
 		"trans": ["transition"],
 		"o": ["opacity"],
+		"ov": ["overflow"], // NEW
+		"ws": ["white-space"], // NEW
+		"pointer": ["pointer-events"], // NEW
 		"z": ["z-index"],
 	};
 	// Symbol Para

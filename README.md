@@ -16,7 +16,7 @@ A quick way to customize css from html class name.
 ## How to Use?
 1. Add js on your html.
 ```html
-<script src="assets/js/flashCSS-1.0.0.min.js"></script>
+<script src="assets/js/flashCSS-1.0.3.min.js"></script>
 ```
 
 2. Execute function when document ready.
@@ -38,11 +38,11 @@ window.addEventListener("DOMContentLoaded", function () {
 var css = new flashCSS({
     observe: false, // default
     media: {
-        xs: 0,    // default
-	sm: 576,  // default
-	md: 768,  // default
-	lg: 992,  // default
-	xl: 1280, // default
+		xs: 0,    // default
+		sm: 576,  // default
+		md: 768,  // default
+		lg: 992,  // default
+		xl: 1280, // default
     },
     important: false // default
 });
@@ -69,6 +69,7 @@ var css = new flashCSS({
 	"flexDir": ["flex-direction"],
 	"justifyContent": ["justify-content"],
 	"alignItems": ["align-items"],
+	"justifyAlign": ["justify-content","align-items"], // NEW
 	"alignSelf": ["align-self"],
 	"flexWrap": ["flex-wrap"],
 	"order": ["order"],
@@ -82,6 +83,10 @@ var css = new flashCSS({
 	"minw" : ["min-width"],
 	"maxh" : ["max-height"],
 	"minh" : ["min-height"],
+	// Grid
+	"colCount": ["column-count"], // NEW
+	"colGap": ["column-gap"], // NEW
+	"colSpan": ["column-span"], // NEW
 	// Padding
 	"p" : ["padding"],
 	"pr": ["padding-right"],
@@ -125,6 +130,9 @@ var css = new flashCSS({
 	// Others
 	"trans": ["transition"],
 	"o": ["opacity"],
+	"ov": ["overflow"], // NEW
+	"ws": ["white-space"], // NEW
+	"pointer": ["pointer-events"], // NEW
 	"z": ["z-index"],
 };
 ```
