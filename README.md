@@ -38,11 +38,11 @@ window.addEventListener("DOMContentLoaded", function () {
 var css = new flashCSS({
     observe: false, // default
     media: {
-		xs: 0,    // default
-		sm: 576,  // default
-		md: 768,  // default
-		lg: 992,  // default
-		xl: 1280, // default
+	xs: 0,    // default
+	sm: 576,  // default
+	md: 768,  // default
+	lg: 992,  // default
+	xl: 1280, // default
     },
     important: false // default
 });
