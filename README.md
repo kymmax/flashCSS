@@ -16,7 +16,7 @@ A quick way to customize css from html class name.
 ## How to Use?
 1. Add js on your html.
 ```html
-<script src="assets/js/flashCSS-1.0.3.min.js"></script>
+<script src="assets/js/flashCSS-1.0.4.min.js"></script>
 ```
 
 2. Execute function when document ready.
@@ -44,7 +44,10 @@ var css = new flashCSS({
 	lg: 992,  // default
 	xl: 1280, // default
     },
-    important: false // default
+    important: false, // default
+	onCompleted: function(){
+		// after style added
+	}
 });
 ```
 - ### `observe: Boolean` ###
@@ -59,6 +62,9 @@ var css = new flashCSS({
 - ### `important: Boolean` ###
 	Add `!important` on all style.
 
+- ### `onCompleted: Callback()` ###
+	Do something after style added.
+
 - ### `Style ( class name : style name )` ###
 	Use html snipset to generate CSS style.
 	Currently only supports para on below:
@@ -69,10 +75,11 @@ var css = new flashCSS({
 	"flexDir": ["flex-direction"],
 	"justifyContent": ["justify-content"],
 	"alignItems": ["align-items"],
-	"justifyAlign": ["justify-content","align-items"], // NEW
+	"justifyAlign": ["justify-content","align-items"],
 	"alignSelf": ["align-self"],
 	"flexWrap": ["flex-wrap"],
 	"order": ["order"],
+	"flex": ["flex"], // NEW
 	// Position
 	"ps": ["position"],
 	// Size
@@ -84,9 +91,9 @@ var css = new flashCSS({
 	"maxh" : ["max-height"],
 	"minh" : ["min-height"],
 	// Grid
-	"colCount": ["column-count"], // NEW
-	"colGap": ["column-gap"], // NEW
-	"colSpan": ["column-span"], // NEW
+	"colCount": ["column-count"],
+	"colGap": ["column-gap"],
+	"colSpan": ["column-span"],
 	// Padding
 	"p" : ["padding"],
 	"pr": ["padding-right"],
@@ -130,10 +137,13 @@ var css = new flashCSS({
 	// Others
 	"trans": ["transition"],
 	"o": ["opacity"],
-	"ov": ["overflow"], // NEW
-	"ws": ["white-space"], // NEW
-	"pointer": ["pointer-events"], // NEW
+	"ov": ["overflow"],
+	"ws": ["white-space"],
+	"pointer": ["pointer-events"],
 	"z": ["z-index"],
+	"objFit": ["object-fit"], // NEW
+	"objPos": ["object-position"], // NEW
+	"ani": ["animation"], // NEW
 };
 ```
 

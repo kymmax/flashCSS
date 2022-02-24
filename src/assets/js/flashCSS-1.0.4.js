@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.0.3
- * 2022-01-06
+ * flashCSS 1.0.4
+ * 2022-02-24
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2022, flashCSS. All rights reserved.
@@ -56,9 +56,10 @@ function flashCSS( PARA ) {
 		"justifyContent": ["justify-content"],
 		"alignItems": ["align-items"],
 		"alignSelf": ["align-self"],
-		"justifyAlign": ["justify-content","align-items"], // NEW
+		"justifyAlign": ["justify-content","align-items"], 
 		"flexWrap": ["flex-wrap"],
 		"order": ["order"],
+		"flex": ["flex"], // NEW
 		// Position
 		"ps": ["position"],
 		// Size
@@ -70,9 +71,9 @@ function flashCSS( PARA ) {
 		"maxh" : ["max-height"],
 		"minh" : ["min-height"],
 		// Grid
-		"colCount": ["column-count"], // NEW
-		"colGap": ["column-gap"], // NEW
-		"colSpan": ["column-span"], // NEW
+		"colCount": ["column-count"], 
+		"colGap": ["column-gap"], 
+		"colSpan": ["column-span"], 
 		// Padding
 		"p" : ["padding"],
 		"pr": ["padding-right"],
@@ -116,10 +117,13 @@ function flashCSS( PARA ) {
 		// Others
 		"trans": ["transition"],
 		"o": ["opacity"],
-		"ov": ["overflow"], // NEW
-		"ws": ["white-space"], // NEW
-		"pointer": ["pointer-events"], // NEW
+		"ov": ["overflow"],
+		"ws": ["white-space"],
+		"pointer": ["pointer-events"],
 		"z": ["z-index"],
+		"objFit": ["object-fit"], // NEW
+		"objPos": ["object-position"], // NEW
+		"ani": ["animation"], // NEW
 	};
 	// Symbol Para
 	var _para_symbol = {
@@ -259,6 +263,11 @@ function flashCSS( PARA ) {
 	
 		_head_tag.appendChild(_style);
 		_style.appendChild(document.createTextNode(_style_list));
+
+		// On completed
+		if (PARA && PARA.onCompleted) {
+			PARA.onCompleted();
+		}
 	}
 
 	// Detect Attr Class Change
