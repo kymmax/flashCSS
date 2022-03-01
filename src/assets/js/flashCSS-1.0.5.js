@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.0.4
- * 2022-02-24
+ * flashCSS 1.0.5
+ * 2022-03-01
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2022, flashCSS. All rights reserved.
@@ -59,7 +59,7 @@ function flashCSS( PARA ) {
 		"justifyAlign": ["justify-content","align-items"], 
 		"flexWrap": ["flex-wrap"],
 		"order": ["order"],
-		"flex": ["flex"], // NEW
+		"flex": ["flex"],
 		// Position
 		"ps": ["position"],
 		// Size
@@ -121,9 +121,9 @@ function flashCSS( PARA ) {
 		"ws": ["white-space"],
 		"pointer": ["pointer-events"],
 		"z": ["z-index"],
-		"objFit": ["object-fit"], // NEW
-		"objPos": ["object-position"], // NEW
-		"ani": ["animation"], // NEW
+		"objFit": ["object-fit"],
+		"objPos": ["object-position"],
+		"ani": ["animation"],
 	};
 	// Symbol Para
 	var _para_symbol = {
@@ -135,6 +135,7 @@ function flashCSS( PARA ) {
 		"plus": ",", // comma
 		"rgba": "rgba(", // rgba
 		"br": ")", // bracket right for rgba
+		"imp": "!important", // important
 	}
 	// Initial
 	this.init = function(){

@@ -79,7 +79,7 @@ var css = new flashCSS({
 	"alignSelf": ["align-self"],
 	"flexWrap": ["flex-wrap"],
 	"order": ["order"],
-	"flex": ["flex"], // NEW
+	"flex": ["flex"],
 	// Position
 	"ps": ["position"],
 	// Size
@@ -141,9 +141,9 @@ var css = new flashCSS({
 	"ws": ["white-space"],
 	"pointer": ["pointer-events"],
 	"z": ["z-index"],
-	"objFit": ["object-fit"], // NEW
-	"objPos": ["object-position"], // NEW
-	"ani": ["animation"], // NEW
+	"objFit": ["object-fit"],
+	"objPos": ["object-position"],
+	"ani": ["animation"],
 };
 ```
 
@@ -159,6 +159,7 @@ var css = new flashCSS({
 	"plus": ",", // comma
 	"rgba": "rgba(", // rgba
 	"br": ")", // bracket right for rgba
+	"imp": "!important", // important
 }
 ```
 ```html
@@ -207,6 +208,10 @@ var css = new flashCSS({
 	 br: ")"
     -->
     <div class="bgc-rgbahash000000plus1br"></div>
+
+## !important
+    // width: 500px !important;
+    <div class="w-500px_imp"></div>
 
 ```
 
