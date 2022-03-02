@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.0.5
- * 2022-03-01
+ * flashCSS 1.0.6
+ * 2022-03-02
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2022, flashCSS. All rights reserved.
@@ -32,21 +32,16 @@ function flashCSS( PARA ) {
 	!PARA ? PARA = {} : PARA;
 
 	var _self = this;
-	var _media = PARA.media || {
-		sm: 576,
-		md: 768,
-		lg: 992,
-		xl: 1280,
-	};
 
 	// Media Query for Size
 	var _para_media = {
 		xs: 0 + "px", // default
-		sm: _media.sm + "px",
-		md: _media.md + "px",
-		lg: _media.lg + "px",
-		xl: _media.xl + "px",
+		sm: (PARA.media && PARA.media.sm ? PARA.media.sm : 576 ) + "px",
+		md: (PARA.media && PARA.media.md ? PARA.media.md : 768 ) + "px",
+		lg: (PARA.media && PARA.media.lg ? PARA.media.lg : 992 ) + "px",
+		xl: (PARA.media && PARA.media.xl ? PARA.media.xl : 1280 ) + "px",
 	};
+	
 
 	// Style Para
 	var _para_spacing = {
@@ -157,8 +152,11 @@ function flashCSS( PARA ) {
 			_class_string.forEach(function (i) {
 	
 				Object.keys(_para_spacing).forEach(function (spacing) {
+
+					if(i.indexOf(spacing) == -1) return; // not indexOf
 	
 					Object.keys(_para_media).forEach(function (media) {
+
 	
 						(media == "xs") ? media = "" : media;
 						var _media_string = (media == "") ? media : media + "-"; // media string
@@ -171,6 +169,7 @@ function flashCSS( PARA ) {
 						var _class_string_merge = _check_string + _value_class; // final class name
 	
 						var _class_record_skip = false; // for check class same or not
+
 						_class_record.forEach(function (className) {
 							if (_check_string + _value_class == className && !_class_record_skip) {
 								_class_record_skip = true;
@@ -238,7 +237,7 @@ function flashCSS( PARA ) {
 							// Record Class Name
 							_class_record.push(_class_string_merge);
 	
-							return
+							return;
 						}
 					})
 				})
@@ -256,7 +255,7 @@ function flashCSS( PARA ) {
 		if (_style_tag != undefined) {
 			_style_tag.remove();
 		}
-		var _head_tag = document.getElementsByTagName('head')[0];
+		var _head_tag = document.getElementsByTagName( (PARA && PARA.style ? PARA.style : 'head' ) )[0];
 	
 		var _style = document.createElement('style');
 		_style.type = 'text/css';

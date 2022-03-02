@@ -16,7 +16,7 @@ A quick way to customize css from html class name.
 ## How to Use?
 1. Add js on your html.
 ```html
-<script src="assets/js/flashCSS-1.0.4.min.js"></script>
+<script src="assets/js/flashCSS-1.0.6.min.js"></script>
 ```
 
 2. Execute function when document ready.
@@ -45,13 +45,15 @@ var css = new flashCSS({
 	xl: 1280, // default
     },
     important: false, // default
-	onCompleted: function(){
+    style: 'head', // default
+    onCompleted: function(){
 		// after style added
-	}
+    }
 });
 ```
 - ### `observe: Boolean` ###
 	If html class has changed which class will be update.
+	(* It will affect the performance and it is recommended to set false on official site)
 
 - ### `media: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} )` ###
 	Related to CSS @media (min-width: px), and value just like Bootstrap.
@@ -61,6 +63,10 @@ var css = new flashCSS({
 
 - ### `important: Boolean` ###
 	Add `!important` on all style.
+
+- ### `style: String (html tag)` ###
+	Append the style on the tag location.
+	You can change it for `body` or `html`.
 
 - ### `onCompleted: Callback()` ###
 	Do something after style added.
@@ -212,7 +218,6 @@ var css = new flashCSS({
 ## !important
     // width: 500px !important;
     <div class="w-500px_imp"></div>
-
 ```
 
 - ### `init()` ###
