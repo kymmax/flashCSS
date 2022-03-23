@@ -18,6 +18,12 @@ A quick way to customize css from html class name.
 ```html
 <script src="assets/js/flashCSS-1.0.6.min.js"></script>
 ```
+or import js module.
+```html
+<script type="module">
+	import { flashCSS } from '/assets/js/flashCSS-1.0.6.module.min.js'
+</script>
+```
 
 2. Execute function when document ready.
 ```javascript
@@ -218,6 +224,12 @@ var css = new flashCSS({
 ## !important
     // width: 500px !important;
     <div class="w-500px_imp"></div>
+
+## Other type with xxx-xxx
+    // display: inline-block;
+    <div class="d-inlineBlock"></div>
+	// align-items: center;
+    <div class="alignItems-center"></div>
 ```
 
 - ### `init()` ###

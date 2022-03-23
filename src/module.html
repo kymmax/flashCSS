@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Web Title -->
+    <title>flashCSS Demo</title>
+
+    <!-- Prevent google translate -->
+    <meta content="en" http-equiv="Content-Language">
+
+    <!-- Web base -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2, user-scalable=0">
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+
+    <!-- Web info -->
+    <meta charset="UTF-8">
+    <meta name="keywords" content="css, html, javascript, rapid, website, develop, flash">
+    <meta name="description" content="A quick way to customize css from html class name.">
+
+    <!-- FB thumbnail -->
+    <meta property="og:url" content="https://kymmax.github.io/flashCSS/src/demo.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="flashCSS">
+    <meta property="og:site_name" content="flashCSS">
+    <meta property="og:description" content="A quick way to customize css from html class name.">
+    <meta property="og:image" content="">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/thumbnail.png">
+
+    <!-- CSS -->
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        *{
+            box-sizing: border-box;
+            transition: all 0.5s;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Stat Main -->
+    <div class="wrapper">
+
+        <h1 class="ps-fixed w-100vw t-0 fa-center d-block"><a href="https://github.com/kymmax/flashCSS" class="color-gray fz-2rem fl-dot1em" style="text-decoration: none;">flashCSS<span class="fz-1rem">@Github</span></a></h1>
+
+        <div class="demo-block w-100vw h-100vh d-flex flexDir-column justifyContent-center">
+            <div id="demo_1" class="w-100per bg-gray">
+                <div class="w-100per">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste sed pariatur, debitis provident officiis maxime voluptates exercitationem esse error, saepe unde beatae numquam eius blanditiis sequi quae dolore at libero doloribus sunt, illo eligendi maiores vel? Maiores, culpa alias magni at ea fugit deserunt ipsam explicabo error commodi perferendis.</div>
+            </div>
+            <div class="mt-3rem fa-center">
+                <label for="input" class="d-block fz-24px mb-1rem">↓↓ Try Here ↓↓</label>
+                <input id="input" type="text" class="w-80per mx-auto fz-24px fh-3rem" placeholder="w-100per bg-gray">
+            </div>
+        </div>
+
+
+    </div>
+    <!-- End Main -->
+
+
+    <!-- Start JS -->
+    <script type="module">
+
+        import { flashCSS } from '/assets/js/flashCSS-1.0.6.module.min.js' 
+
+        window.addEventListener("DOMContentLoaded", function () {
+            // INIT flashCSS
+            var css = new flashCSS({observe: true});
+
+            // DEMO
+            function _(ID){
+                return document.getElementById(ID);
+            }
+            
+            _("input").addEventListener("input",function (para) {
+                _("demo_1").setAttribute("class",para.target.value);
+            })
+
+        });
+    </script>
+    <!-- End JS -->
+</body>
+
+</html>
