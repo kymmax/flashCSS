@@ -21,7 +21,7 @@ A quick way to customize css from html class name.
 or import js module.
 ```html
 <script type="module">
-	import { flashCSS } from '/assets/js/flashCSS-1.0.6.module.min.js'
+    import { flashCSS } from '/assets/js/flashCSS-1.0.6.module.min.js'
 </script>
 ```
 
@@ -228,7 +228,7 @@ var css = new flashCSS({
 ## Other type with xxx-xxx
     // display: inline-block;
     <div class="d-inlineBlock"></div>
-	// align-items: center;
+    // align-items: center;
     <div class="alignItems-center"></div>
 ```
 
