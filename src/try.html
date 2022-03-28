@@ -46,9 +46,9 @@
 <body>
 
     <!-- Stat Main -->
-    <div class="wrapper">
+    <div class="wrapper  h-.2rem!">
 
-        <h1 class="ps-fixed w-100vw t-0 fa-center d-block"><a href="https://github.com/kymmax/flashCSS" class="color-gray fz-2rem fl-dot1em" style="text-decoration: none;">flashCSS<span class="fz-1rem">@Github</span></a></h1>
+        <!-- <h1 class="ps-fixed w-100vw t-0 fa-center d-block"><a href="https://github.com/kymmax/flashCSS" class="color-gray fz-2rem fl-dot1em" style="text-decoration: none;">flashCSS<span class="fz-1rem">@Github</span></a></h1>
 
         <div class="demo-block w-100vw h-100vh d-flex flexDir-column justifyContent-center">
             <div id="demo_1" class="w-100per bg-gray">
@@ -58,7 +58,7 @@
                 <label for="input" class="d-block fz-24px mb-1rem">↓↓ Try Here ↓↓</label>
                 <input id="input" type="text" class="w-80per mx-auto fz-24px fh-3rem" placeholder="w-100per bg-gray">
             </div>
-        </div>
+        </div> -->
 
 
     </div>
@@ -66,7 +66,7 @@
 
 
     <!-- Start JS -->
-    <script src="assets/js/flashCSS-1.0.6.js"></script>
+    <script src="assets/js/flashCSS-1.0.7.js"></script>
     <script>
 
         window.addEventListener("DOMContentLoaded", function () {
@@ -78,10 +78,38 @@
                 return document.getElementById(ID);
             }
             
-            _("input").addEventListener("input",function (para) {
-                _("demo_1").setAttribute("class",para.target.value);
-            })
+            // _("input").addEventListener("input",function (para) {
+            //     _("demo_1").setAttribute("class",para.target.value);
+            // })
 
+            // 
+
+            var reg = new RegExp("([(]|[)]|,|，|;)", "g");
+            
+            // 更換class
+            var str = "(123,456，789;)";
+            // var strs = str.replace(reg,"$&t");  
+            var strs = str.replace(reg,function(match, offset, string){
+                return (offset > 0 ? '' : '\\') + match;
+            });  
+
+            // console.log(strs);
+
+            
+            // 更換數值
+            var strs2 = str.replace(reg, function($0, $1) {
+                return {
+                    "(": "bl",
+                    ")": "br",
+                    ",": "his",
+                    "，": "was",
+                    ";": "could",
+                }[$1];
+            });
+            
+            console.log(strs2);
+            
+            
         });
     </script>
     <!-- End JS -->
