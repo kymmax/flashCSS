@@ -52,6 +52,7 @@ var css = new flashCSS({
     },
     important: false, // default
     style: 'head', // default
+    link: '-', // default
     onCompleted: function(){
         // after style added
     }
