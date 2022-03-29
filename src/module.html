@@ -48,15 +48,15 @@
     <!-- Stat Main -->
     <div class="wrapper">
 
-        <h1 class="ps-fixed w-100vw t-0 fa-center d-block"><a href="https://github.com/kymmax/flashCSS" class="color-gray fz-2rem fl-dot1em" style="text-decoration: none;">flashCSS<span class="fz-1rem">@Github</span></a></h1>
+        <h1 class="ps-fixed w-100vw t-0 fa-center d-block"><a href="https://github.com/kymmax/flashCSS" class="color-gray fz-2rem fl-.1em" style="text-decoration: none;">flashCSS<span class="fz-1rem">@Github</span></a></h1>
 
         <div class="demo-block w-100vw h-100vh d-flex flexDir-column justifyContent-center">
-            <div id="demo_1" class="w-100per bg-gray">
+            <div id="demo_1" class="w-100% bg-gray">
                 <div class="w-100per">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste sed pariatur, debitis provident officiis maxime voluptates exercitationem esse error, saepe unde beatae numquam eius blanditiis sequi quae dolore at libero doloribus sunt, illo eligendi maiores vel? Maiores, culpa alias magni at ea fugit deserunt ipsam explicabo error commodi perferendis.</div>
             </div>
             <div class="mt-3rem fa-center">
-                <label for="input" class="d-block fz-24px mb-1rem">↓↓ Try Here ↓↓</label>
-                <input id="input" type="text" class="w-80per mx-auto fz-24px fh-3rem" placeholder="w-100per bg-gray">
+                <label for="input" class="d-block fz-24px mb-1rem">↓↓ Try & Enter Here ↓↓</label>
+                <input id="input" type="text" class="w-80% mx-auto fz-24px fh-3rem" placeholder="w-100% bg-gray">
             </div>
         </div>
 
@@ -68,7 +68,7 @@
     <!-- Start JS -->
     <script type="module">
 
-        import { flashCSS } from '/assets/js/flashCSS-1.0.6.module.min.js' 
+        import { flashCSS } from '/assets/js/flashCSS-1.0.7.module.min.js' 
 
         window.addEventListener("DOMContentLoaded", function () {
             // INIT flashCSS
@@ -79,7 +79,7 @@
                 return document.getElementById(ID);
             }
             
-            _("input").addEventListener("input",function (para) {
+            _("input").addEventListener("change",function (para) {
                 _("demo_1").setAttribute("class",para.target.value);
             })
 

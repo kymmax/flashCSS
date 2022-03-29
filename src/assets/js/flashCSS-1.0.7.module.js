@@ -8,26 +8,7 @@
  * 
  * Licensed MIT
  */
-
-// ## Fix IE
-if (window.NodeList && !NodeList.prototype.forEach) {
-    NodeList.prototype.forEach = Array.prototype.forEach;
-}
-if (!String.prototype.includes) {
-    String.prototype.includes = function() {
-        'use strict';
-        return String.prototype.indexOf.apply(this, arguments) !== -1;
-    };
-}
-if (!('remove' in Element.prototype)) {
-    Element.prototype.remove = function() {
-        if (this.parentNode) {
-            this.parentNode.removeChild(this);
-        }
-    };
-}
-
-function flashCSS( PARA ) {
+export function flashCSS( PARA ) {
 
 	!PARA ? PARA = {} : PARA;
 
@@ -208,11 +189,11 @@ function flashCSS( PARA ) {
 			var _class_item_value;
 			var _style_item_value;
 
-			// # 包含 media str
+			// # 包含 media字樣
 			if(_class_media_match){
 				_class_item_value = _style_item_value = i.split(_class_head+_class_link +_class_media+_class_link)[1];
 			}
-			// # not include  str
+			// # 不包含 media字樣
 			else{
 				_class_media = "";
 				_class_item_value = _style_item_value = i.split(_class_head+_class_link)[1];
@@ -358,5 +339,4 @@ function flashCSS( PARA ) {
 	})
 	this.setMedia();
 	this.setTag();
-
 }

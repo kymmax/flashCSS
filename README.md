@@ -3,25 +3,25 @@ A quick way to customize css from html class name.
 
 [DEMO](https://kymmax.github.io/flashCSS/src/demo.html)
 ```html
-<div class="d-flex ps-fixed fw-bold fl-dot1em fz-16px fz-lg-20px p-1dot5rem"></div>
+<div class="d-flex ps-fixed fw-bold fl-.1em fz-16px fz-lg-20px p-1.5rem"></div>
 ```
 
 ## Features
 - Create CSS style from html class name.
 - Fast to develop website.
 - More freedom to use.
-- Min JS size `~4 KB` only.
+- Min JS size `~5 KB` only.
 - Save more CSS file size.
 
 ## How to Use?
 1. Add js on your html.
 ```html
-<script src="assets/js/flashCSS-1.0.6.min.js"></script>
+<script src="assets/js/flashCSS-1.0.7.min.js"></script>
 ```
 or import js module.
 ```html
 <script type="module">
-    import { flashCSS } from '/assets/js/flashCSS-1.0.6.module.min.js'
+    import { flashCSS } from '/assets/js/flashCSS-1.0.7.module.min.js'
 </script>
 ```
 
@@ -35,25 +35,25 @@ window.addEventListener("DOMContentLoaded", function () {
 3. Start your project!
 (width: 25%; height: 200px; margin-top: 1rem; background-color: black)
 ```html
-<div class="w-25per h-200px mt-1rem bgc-black"></div>
-<div class="d-flex alignItems-flexStart"></div>
+<div class="w-25% h-200px mt-1rem bgc-black"></div>
+<div class="d-flex alignItems-flex-start"></div>
 ```
 
 ## Parameters
 ```javascript
 var css = new flashCSS({
     observe: false, // default
-    media: {
-	xs: 0,    // default
-	sm: 576,  // default
-	md: 768,  // default
-	lg: 992,  // default
-	xl: 1280, // default
+        media: {
+        xs: 0,    // default
+        sm: 576,  // default
+        md: 768,  // default
+        lg: 992,  // default
+        xl: 1280, // default
     },
     important: false, // default
     style: 'head', // default
     onCompleted: function(){
-		// after style added
+        // after style added
     }
 });
 ```
@@ -64,7 +64,7 @@ var css = new flashCSS({
 - ### `media: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} )` ###
 	Related to CSS @media (min-width: px), and value just like Bootstrap.
 ```html
-<div class="fz-16px fz-lg-20px my-1rem my-lg-1dot5rem"></div>
+<div class="fz-16px fz-lg-20px my-1rem my-lg-1.5rem"></div>
 ```
 
 - ### `important: Boolean` ###
@@ -74,6 +74,15 @@ var css = new flashCSS({
 	Append the style on the tag location.
 	You can change it for `body` or `html`.
 
+- ### `link: String (class link)` ###
+	You can change class name dash from `-` or `~ @ # $ ^ & * + = :` and other symbols.
+```html
+## -
+<div class="d-block d-xl-none"></div>
+## :
+<div class="d:block d:xl:none"></div>
+```
+
 - ### `onCompleted: Callback()` ###
 	Do something after style added.
 
@@ -82,80 +91,96 @@ var css = new flashCSS({
 	Currently only supports para on below:
 ```javascript
 {
-	// Display
-	"d": ["display"],
-	"flexDir": ["flex-direction"],
-	"justifyContent": ["justify-content"],
-	"alignItems": ["align-items"],
-	"justifyAlign": ["justify-content","align-items"],
-	"alignSelf": ["align-self"],
-	"flexWrap": ["flex-wrap"],
-	"order": ["order"],
-	"flex": ["flex"],
-	// Position
-	"ps": ["position"],
-	// Size
-	"w" : ["width"],
-	"h" : ["height"],
-	"wh": ["width","height"],
-	"maxw" : ["max-width"],
-	"minw" : ["min-width"],
-	"maxh" : ["max-height"],
-	"minh" : ["min-height"],
-	// Grid
-	"colCount": ["column-count"],
-	"colGap": ["column-gap"],
-	"colSpan": ["column-span"],
-	// Padding
-	"p" : ["padding"],
-	"pr": ["padding-right"],
-	"pl": ["padding-left"],
-	"pt": ["padding-top"],
-	"pb": ["padding-bottom"],
-	"px": ["padding-left", "padding-right"],
-	"py": ["padding-top", "padding-bottom"],
-	// Margin
-	"m" : ["margin"],
-	"mr": ["margin-right"],
-	"ml": ["margin-left"],
-	"mt": ["margin-top"],
-	"mb": ["margin-bottom"],
-	"mx": ["margin-left", "margin-right"],
-	"my": ["margin-top", "margin-bottom"],
-	// Absolute
-	"at": ["top"],
-	"ab": ["bottom"],
-	"al": ["left"],
-	"ar": ["right"],
-	// Font
-	"fz": ["font-size"],
-	"fl": ["letter-spacing"],
-	"fh": ["line-height"],
-	"fa": ["text-align"],
-	"fw": ["font-weight"],
-	// Border
-	"br": ["border"],
-	"bw": ["border-width"],
-	"bc": ["border-color"],
-	"bs": ["border-style"],
-	"round": ["border-radius"],
-	// Shadow
-	"sdb": ["box-shadow"],
-	"sdt": ["text-shadow"],
-	// Color
-	"color": ["color"],
-	"bg": ["background"],
-	"bgc": ["background-color"],
-	// Others
-	"trans": ["transition"],
-	"o": ["opacity"],
-	"ov": ["overflow"],
-	"ws": ["white-space"],
-	"pointer": ["pointer-events"],
-	"z": ["z-index"],
-	"objFit": ["object-fit"],
-	"objPos": ["object-position"],
-	"ani": ["animation"],
+// Display
+    "d": ["display"],
+    "flexDir": ["flex-direction"],
+    "justifyContent": ["justify-content"],
+    "alignItems": ["align-items"],
+    "justifyAlign": ["justify-content","align-items"],
+    "alignSelf": ["align-self"],
+    "flexWrap": ["flex-wrap"],
+    "order": ["order"],
+    "flex": ["flex"],
+    // Position
+    "ps": ["position"],
+    // Size
+    "w" : ["width"],
+    "h" : ["height"],
+    "wh": ["width","height"],
+    "maxw" : ["max-width"],
+    "minw" : ["min-width"],
+    "maxh" : ["max-height"],
+    "minh" : ["min-height"],
+    // Grid
+    "gTempCol": ["grid-template-columns"], // new
+    "gAutoRow": ["grid-auto-rows"], // new
+    "gColStart": ["grid-column-start"], // new
+    "gColEnd": ["grid-column-end"], // new
+    "gRowStart": ["grid-row-start"], // new
+    "gRowEnd": ["grid-row-end"], // new
+    "gColGap": ["grid-column-gap"], // new
+    "gRowGap": ["grid-row-gap"], // new
+    "colCount": ["column-count"],
+    "colGap": ["column-gap"],
+    "colSpan": ["column-span"],
+    // Padding
+    "p" : ["padding"],
+    "pr": ["padding-right"],
+    "pl": ["padding-left"],
+    "pt": ["padding-top"],
+    "pb": ["padding-bottom"],
+    "px": ["padding-left", "padding-right"],
+    "py": ["padding-top", "padding-bottom"],
+    // Margin
+    "m" : ["margin"],
+    "mr": ["margin-right"],
+    "ml": ["margin-left"],
+    "mt": ["margin-top"],
+    "mb": ["margin-bottom"],
+    "mx": ["margin-left", "margin-right"],
+    "my": ["margin-top", "margin-bottom"],
+    // Absolute
+    "at": ["top"],
+    "ab": ["bottom"],
+    "al": ["left"],
+    "ar": ["right"],
+    // Font
+    "fz": ["font-size"],
+    "fl": ["letter-spacing"],
+    "fh": ["line-height"],
+    "fa": ["text-align"],
+    "fw": ["font-weight"],
+    // Border
+    "br": ["border"],
+    "bw": ["border-width"],
+    "bc": ["border-color"],
+    "bs": ["border-style"],
+    "round": ["border-radius"],
+    // Shadow
+    "sdb": ["box-shadow"],
+    "sdt": ["text-shadow"],
+    // Color
+    "color": ["color"],
+    // Background
+    "bg"   : ["background"],  // fix
+    "bgc"  : ["background-color"],  // fix
+    // Others
+    "ts": ["transition"],  // fix
+    "tf": ["transform"],  // new
+    "tfStyle": ["transform-style"],  // new
+    "tfOrigin": ["transform-origin"],  // new
+    "tt": ["text-transform"],  // new
+    "o": ["opacity"],
+    "ov": ["overflow"],
+    "ws": ["white-space"],
+    "pointer": ["pointer-events"],
+    "z": ["z-index"],
+    "objFit": ["object-fit"],
+    "objPos": ["object-position"],
+    "ani": ["animation"],
+    "filter": ["filter"],  // new
+    "blend": ["mix-blend-mode"],  // new
+    "ratio": ["aspect-ratio"],  // new
 };
 ```
 
@@ -163,24 +188,25 @@ var css = new flashCSS({
 	Use some snipset to correspond to the symbol, because some symbols can't be class name.
 ```javascript
 {
-	"dot" : ".", // dot
-	"neg" : "-", // negative
-	"per" : "%", // percent
-	"hash": "#", // color hash code
-	"_"   : " ", // space
-	"plus": ",", // comma
-	"rgba": "rgba(", // rgba
-	"br": ")", // bracket right for rgba
-	"imp": "!important", // important
+    "." : ".", // dot
+    "neg" : "-", // negative
+    "%" : "%", // percent
+    "#": "#", // color hash code
+    "_"   : " ", // space
+    ",": ",", // comma
+    "(": "(", // bracket - L
+    ")": ")", // bracket - R
+    "/": "/", // slash
+    "!": " !important", // important
 }
 ```
 ```html
 ## Dot
     // width: 50.5px;
-    <div class="w-50dot5px"></div>
+    <div class="w-50.5px"></div>
 
     // letter-spacing: 0.15em;
-    <div class="fl-dot15em"></div>
+    <div class="fl-.15em"></div>
 
 ## Negative
     // margin-top: -1rem;
@@ -188,11 +214,11 @@ var css = new flashCSS({
 
 ## Percent
     // width: 50%;
-    <div class="w-50per"></div>
+    <div class="w-50%"></div>
 
 ## Color Hash Code
     // background-color: #fff000;
-    <div class="bgc-hashfff000"></div>
+    <div class="bgc-#fff000"></div>
 
 ## Space
     // text-shadow: 0 0 red;
@@ -206,38 +232,33 @@ var css = new flashCSS({
 
 ## Comma
     // text-shadow: 0 0 red, 0 0 blue;
-    <div class="sdt-0_0_red_plus_0_0_blue"></div>
-    <div class="sdt-0_0_redplus_0_0_blue"></div>
-    <div class="sdt-0_0_red_plus0_0_blue"></div>
-    <div class="sdt-0_0_redplus0_0_blue"></div>
+    <div class="sdt-0_0_red,0_0_blue"></div>
 
 ## RGBA
     // background-color: rgba(0,0,0,1);
-    <!-- rgba
-	 hash000000: "#" + 000000 (6 characters)
-	 plus: "," 
-	 1: alpha value
-	 br: ")"
-    -->
-    <div class="bgc-rgbahash000000plus1br"></div>
+    <div class="bgc-rgba(#000000,1)"></div>
+
+## Slash
+    // aspect-ratio: 16/9;
+    <div class="ratio-16/9"></div>
 
 ## !important
     // width: 500px !important;
-    <div class="w-500px_imp"></div>
+    <div class="w-500px!"></div>
 
 ## Other type with xxx-xxx
     // display: inline-block;
-    <div class="d-inlineBlock"></div>
+    <div class="d-inline-block"></div>
     // align-items: center;
     <div class="alignItems-center"></div>
 ```
 
-- ### `init()` ###
-You can use `init()` to re-check whole html class name to generate css style.
+- ### `reInit()` ###
+You can use `reInit()` to re-check whole html class name to generate css style.
 
 ```javascript
 var css = new flashCSS();
-    css.init();
+    css.reInit();
 ```
 
 
