@@ -52,14 +52,14 @@ window.addEventListener("DOMContentLoaded", function () {
 * You can do class name as template, and save more file size.
 ( `@template name` , `=template name` )
 ```html
-    // Origin
-    <div class="w-25% h-200px mt-1rem bgc-black @template"></div>
-    <div class="=template"></div>
-    <div class="=template color-red"></div>
-    // Output
-    <div class="w-25% h-200px mt-1rem bgc-black "></div>
-    <div class="w-25% h-200px mt-1rem bgc-black "></div>
-    <div class="w-25% h-200px mt-1rem bgc-black  color-red"></div>
+// Origin
+<div class="w-25% h-200px mt-1rem bgc-black @template"></div>
+<div class="=template"></div>
+<div class="=template color-red"></div>
+// Output
+<div class="w-25% h-200px mt-1rem bgc-black "></div>
+<div class="w-25% h-200px mt-1rem bgc-black "></div>
+<div class="w-25% h-200px mt-1rem bgc-black  color-red"></div>
 ```
 
 ## Parameters
