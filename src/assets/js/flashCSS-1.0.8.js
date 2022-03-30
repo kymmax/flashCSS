@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.0.7
- * 2022-03-29
+ * flashCSS 1.0.8
+ * 2022-03-30
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2022, flashCSS. All rights reserved.
@@ -8,7 +8,28 @@
  * 
  * Licensed MIT
  */
-export function flashCSS( PARA ) {
+
+// ## Fix IE
+if (window.NodeList && !NodeList.prototype.forEach) {
+    NodeList.prototype.forEach = Array.prototype.forEach;
+}
+if (!String.prototype.includes) {
+    String.prototype.includes = function() {
+        'use strict';
+        return String.prototype.indexOf.apply(this, arguments) !== -1;
+    };
+}
+if (!('remove' in Element.prototype)) {
+    Element.prototype.remove = function() {
+        if (this.parentNode) {
+            this.parentNode.removeChild(this);
+        }
+    };
+}
+
+// html default invisible
+document.documentElement.style.opacity = 0;
+function flashCSS( PARA ) {
 
 	!PARA ? PARA = {} : PARA;
 
@@ -38,7 +59,7 @@ export function flashCSS( PARA ) {
 		"justifyContent": ["justify-content"],
 		"alignItems": ["align-items"],
 		"alignSelf": ["align-self"],
-		"justifyAlign": ["justify-content","align-items"], 
+		"justifyAlign": ["justify-content","align-items"],
 		"flexWrap": ["flex-wrap"],
 		"order": ["order"],
 		"flex": ["flex"],
@@ -53,17 +74,18 @@ export function flashCSS( PARA ) {
 		"maxh" : ["max-height"],
 		"minh" : ["min-height"],
 		// Grid
-		"gTempCol": ["grid-template-columns"], // new
-		"gAutoRow": ["grid-auto-rows"], // new
-		"gColStart": ["grid-column-start"], // new
-		"gColEnd": ["grid-column-end"], // new
-		"gRowStart": ["grid-row-start"], // new
-		"gRowEnd": ["grid-row-end"], // new
-		"gColGap": ["grid-column-gap"], // new
-		"gRowGap": ["grid-row-gap"], // new
-		"colCount": ["column-count"], 
-		"colGap": ["column-gap"], 
-		"colSpan": ["column-span"], 
+		"gTempCol": ["grid-template-columns"],
+		"gAutoRow": ["grid-auto-rows"],
+		"gColStart": ["grid-column-start"],
+		"gColEnd": ["grid-column-end"],
+		"gRowStart": ["grid-row-start"],
+		"gRowEnd": ["grid-row-end"],
+		"gColGap": ["grid-column-gap"],
+		"gRowGap": ["grid-row-gap"],
+		"colCount": ["column-count"],
+		"colGap": ["column-gap"],
+		"colSpan": ["column-span"],
+		"rowGap": ["row-gap"], // new
 		// Padding
 		"p" : ["padding"],
 		"pr": ["padding-right"],
@@ -103,14 +125,14 @@ export function flashCSS( PARA ) {
 		// Color
 		"color": ["color"],
 		// Background
-		"bg"   : ["background"],  // fix
-		"bgc"  : ["background-color"],  // fix
+		"bg"   : ["background"],
+		"bgc"  : ["background-color"],
 		// Others
-		"ts": ["transition"],  // fix
-		"tf": ["transform"],  // new
-		"tfStyle": ["transform-style"],  // new
-		"tfOrigin": ["transform-origin"],  // new
-		"tt": ["text-transform"],  // new
+		"ts": ["transition"],
+		"tf": ["transform"],
+		"tfStyle": ["transform-style"],
+		"tfOrigin": ["transform-origin"],
+		"tt": ["text-transform"],
 		"o": ["opacity"],
 		"ov": ["overflow"],
 		"ws": ["white-space"],
@@ -119,9 +141,9 @@ export function flashCSS( PARA ) {
 		"objFit": ["object-fit"],
 		"objPos": ["object-position"],
 		"ani": ["animation"],
-		"filter": ["filter"],  // new
-		"blend": ["mix-blend-mode"],  // new
-		"ratio": ["aspect-ratio"],  // new
+		"filter": ["filter"],
+		"blend": ["mix-blend-mode"],
+		"ratio": ["aspect-ratio"],
 	};
 	var _para_spacing_string = "";
 	Object.keys( _para_spacing).forEach(function(item,index,string){
@@ -189,11 +211,11 @@ export function flashCSS( PARA ) {
 			var _class_item_value;
 			var _style_item_value;
 
-			// # 包含 media字樣
+			// # 包含 media str
 			if(_class_media_match){
 				_class_item_value = _style_item_value = i.split(_class_head+_class_link +_class_media+_class_link)[1];
 			}
-			// # 不包含 media字樣
+			// # not include  str
 			else{
 				_class_media = "";
 				_class_item_value = _style_item_value = i.split(_class_head+_class_link)[1];
@@ -282,6 +304,7 @@ export function flashCSS( PARA ) {
 			_head_tag.appendChild(_style);
 
 		// On completed
+		document.documentElement.style.opacity = 1; // html visible now
 		if (PARA.onCompleted) {
 			PARA.onCompleted();
 		}
@@ -319,6 +342,28 @@ export function flashCSS( PARA ) {
 		} : null;
 	}
 
+	// Copy from '@' to '='
+	this.copy = function( DOM ){
+		var _class_all_name = DOM.getAttribute("class");
+		var _class_all_group = _class_all_name.split(" ");
+			_class_all_group.forEach(function(name){
+				if(name.match(/^@/g)){
+					var _copy_name = name.split("@")[1]; // ＠ after name
+					var _copy_str = _class_all_name.replace(name, "");
+					DOM.setAttribute("class", _copy_str); // remove @ str
+					
+					var _copyitem = document.querySelectorAll('.\\=' + _copy_name);
+						_copyitem.forEach(function(i_copy){
+							var _target_name = i_copy.getAttribute("class");
+							var _target_str = _target_name.replace("="+_copy_name, _copy_str);
+
+							i_copy.setAttribute("class", _target_str); // remove ~ str
+						})
+					
+				}
+			})
+	}
+
 
 	if (PARA.observe) {
 		this.observer();
@@ -335,8 +380,11 @@ export function flashCSS( PARA ) {
 
 	// Initial
 	document.querySelectorAll("[class]").forEach(function (DOM) {
+		_self.copy(DOM);
 		_self.init(DOM);
 	})
+
 	this.setMedia();
 	this.setTag();
+
 }

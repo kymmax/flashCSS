@@ -10,19 +10,29 @@ A quick way to customize css from html class name.
 - Create CSS style from html class name.
 - Fast to develop website.
 - More freedom to use.
-- Min JS size `~5 KB` only.
+- Min JS size `~6 KB` only.
 - Save more CSS file size.
 
 ## How to Use?
-1. Add js on your html.
+1. Add js before body.
 ```html
-<script src="assets/js/flashCSS-1.0.7.min.js"></script>
+<html>
+    <head>
+        <script src="assets/js/flashCSS-1.0.8.min.js"></script>
+    </head>
+    <body></body>
+</html>
 ```
 or import js module.
 ```html
-<script type="module">
-    import { flashCSS } from '/assets/js/flashCSS-1.0.7.module.min.js'
-</script>
+<html>
+    <head>
+        <script type="module">
+            import { flashCSS } from '/assets/js/flashCSS-1.0.8.module.min.js'
+        </script>
+    </head>
+    <body></body>
+</html>
 ```
 
 2. Execute function when document ready.
@@ -37,6 +47,19 @@ window.addEventListener("DOMContentLoaded", function () {
 ```html
 <div class="w-25% h-200px mt-1rem bgc-black"></div>
 <div class="d-flex alignItems-flex-start"></div>
+```
+
+* You can do class name as template, and save more file size.
+( `@template name` , `=template name` )
+```html
+    // Origin
+    <div class="w-25% h-200px mt-1rem bgc-black @template"></div>
+    <div class="=template"></div>
+    <div class="=template color-red"></div>
+    // Output
+    <div class="w-25% h-200px mt-1rem bgc-black "></div>
+    <div class="w-25% h-200px mt-1rem bgc-black "></div>
+    <div class="w-25% h-200px mt-1rem bgc-black  color-red"></div>
 ```
 
 ## Parameters
@@ -76,7 +99,8 @@ var css = new flashCSS({
 	You can change it for `body` or `html`.
 
 - ### `link: String (class link)` ###
-	You can change class name dash from `-` or `~ @ # $ ^ & * + = :` and other symbols.
+	You can change class name dash from `-` to `~ # $ ^ & * + :`, and other symbols.
+    (Can't use `@` and `=` now.)
 ```html
 ## -
 <div class="d-block d-xl-none"></div>
@@ -113,17 +137,18 @@ var css = new flashCSS({
     "maxh" : ["max-height"],
     "minh" : ["min-height"],
     // Grid
-    "gTempCol": ["grid-template-columns"], // new
-    "gAutoRow": ["grid-auto-rows"], // new
-    "gColStart": ["grid-column-start"], // new
-    "gColEnd": ["grid-column-end"], // new
-    "gRowStart": ["grid-row-start"], // new
-    "gRowEnd": ["grid-row-end"], // new
-    "gColGap": ["grid-column-gap"], // new
-    "gRowGap": ["grid-row-gap"], // new
+    "gTempCol": ["grid-template-columns"]
+    "gAutoRow": ["grid-auto-rows"]
+    "gColStart": ["grid-column-start"]
+    "gColEnd": ["grid-column-end"]
+    "gRowStart": ["grid-row-start"]
+    "gRowEnd": ["grid-row-end"]
+    "gColGap": ["grid-column-gap"]
+    "gRowGap": ["grid-row-gap"]
     "colCount": ["column-count"],
     "colGap": ["column-gap"],
     "colSpan": ["column-span"],
+    "rowGap": ["row-gap"], // new
     // Padding
     "p" : ["padding"],
     "pr": ["padding-right"],
@@ -163,14 +188,14 @@ var css = new flashCSS({
     // Color
     "color": ["color"],
     // Background
-    "bg"   : ["background"],  // fix
-    "bgc"  : ["background-color"],  // fix
+    "bg"   : ["background"],
+    "bgc"  : ["background-color"],
     // Others
-    "ts": ["transition"],  // fix
-    "tf": ["transform"],  // new
-    "tfStyle": ["transform-style"],  // new
-    "tfOrigin": ["transform-origin"],  // new
-    "tt": ["text-transform"],  // new
+    "ts": ["transition"],
+    "tf": ["transform"],
+    "tfStyle": ["transform-style"],
+    "tfOrigin": ["transform-origin"],
+    "tt": ["text-transform"],
     "o": ["opacity"],
     "ov": ["overflow"],
     "ws": ["white-space"],
@@ -179,9 +204,9 @@ var css = new flashCSS({
     "objFit": ["object-fit"],
     "objPos": ["object-position"],
     "ani": ["animation"],
-    "filter": ["filter"],  // new
-    "blend": ["mix-blend-mode"],  // new
-    "ratio": ["aspect-ratio"],  // new
+    "filter": ["filter"],
+    "blend": ["mix-blend-mode"],
+    "ratio": ["aspect-ratio"],
 };
 ```
 
