@@ -9,8 +9,6 @@
  * Licensed MIT
  */
 
-// html default invisible
-document.documentElement.style.opacity = 0;
 export function flashCSS( PARA ) {
 
 	!PARA ? PARA = {} : PARA;
@@ -286,7 +284,6 @@ export function flashCSS( PARA ) {
 			_head_tag.appendChild(_style);
 
 		// On completed
-		document.documentElement.style.opacity = 1; // html visible now
 		if (PARA.onCompleted) {
 			PARA.onCompleted();
 		}
