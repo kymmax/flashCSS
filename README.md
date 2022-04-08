@@ -14,25 +14,15 @@ A quick way to customize css from html class name.
 - Save more CSS file size.
 
 ## How to Use?
-1. Add js before body.
+1. Add js.
 ```html
-<html>
-    <head>
-        <script src="assets/js/flashCSS-1.0.8.min.js"></script>
-    </head>
-    <body></body>
-</html>
+<script src="assets/js/flashCSS-1.0.8.min.js"></script>
 ```
 or import js module.
 ```html
-<html>
-    <head>
-        <script type="module">
-            import { flashCSS } from '/assets/js/flashCSS-1.0.8.module.min.js'
-        </script>
-    </head>
-    <body></body>
-</html>
+<script type="module">
+    import { flashCSS } from '/assets/js/flashCSS-1.0.8.module.min.js'
+</script>
 ```
 
 2. Execute function when document ready.
