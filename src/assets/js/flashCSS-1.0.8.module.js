@@ -9,7 +9,7 @@
  * Licensed MIT
  */
 
-export function flashCSS( PARA ) {
+export default function flashCSS( PARA ) {
 
 	!PARA ? PARA = {} : PARA;
 
