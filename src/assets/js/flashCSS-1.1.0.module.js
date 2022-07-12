@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.0.8
- * 2022-03-30
+ * flashCSS 1.1.0
+ * 2022-07-12
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2022, flashCSS. All rights reserved.
@@ -65,7 +65,7 @@ export default function flashCSS( PARA ) {
 		"colCount": ["column-count"],
 		"colGap": ["column-gap"],
 		"colSpan": ["column-span"],
-		"rowGap": ["row-gap"], // new
+		"rowGap": ["row-gap"],
 		// Padding
 		"p" : ["padding"],
 		"pr": ["padding-right"],
@@ -93,6 +93,9 @@ export default function flashCSS( PARA ) {
 		"fh": ["line-height"],
 		"fa": ["text-align"],
 		"fw": ["font-weight"],
+		"fd": ["text-decoration"], // new
+		"fi": ["text-indent"], // new
+		"ft": ["text-transform"], // new
 		// Border
 		"br": ["border"],
 		"bw": ["border-width"],
@@ -104,26 +107,36 @@ export default function flashCSS( PARA ) {
 		"sdt": ["text-shadow"],
 		// Color
 		"color": ["color"],
+		"filter": ["filter"],
+		"blend": ["mix-blend-mode"],
 		// Background
 		"bg"   : ["background"],
 		"bgc"  : ["background-color"],
-		// Others
+		"bgi"  : ["background-image"], // new
+		"bgs"  : ["background-size"], // new
+		"bgp"  : ["background-position"], // new
+		"bgr"  : ["background-repeat"], // new
+		"bgo"  : ["background-origin"], // new
+		// Transform
 		"ts": ["transition"],
 		"tf": ["transform"],
 		"tfStyle": ["transform-style"],
 		"tfOrigin": ["transform-origin"],
+		// Others
 		"tt": ["text-transform"],
 		"o": ["opacity"],
 		"ov": ["overflow"],
 		"ws": ["white-space"],
-		"pointer": ["pointer-events"],
 		"z": ["z-index"],
 		"objFit": ["object-fit"],
 		"objPos": ["object-position"],
 		"ani": ["animation"],
-		"filter": ["filter"],
-		"blend": ["mix-blend-mode"],
 		"ratio": ["aspect-ratio"],
+		"pointer": ["pointer-events"],
+		"cursor": ["cursor"], // new
+		"uSelect": ["user-select"], // new
+		"va": ["vertical-align"], // new
+		"wm": ["writing-mode"], // new
 	};
 	var _para_spacing_string = "";
 	Object.keys( _para_spacing).forEach(function(item,index,string){
@@ -232,7 +245,7 @@ export default function flashCSS( PARA ) {
 			// Combine Style Value String
 			var _string_group = "";
 			_style_item_name.split(",").forEach(function(string){
-				_string_group += string+": " + _style_item_value + ( (PARA.important) ? " !important" : ";" )
+				_string_group += string+": " + _style_item_value + ( (PARA.important) ? " !important;" : ";" )
 			})
 
 			//  # Class + Value

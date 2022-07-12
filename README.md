@@ -16,12 +16,12 @@ A quick way to customize css from html class name.
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.0.8.min.js"></script>
+<script src="assets/js/flashCSS-1.1.0.min.js"></script>
 ```
 or import js module.
 ```html
 <script type="module">
-    import { flashCSS } from '/assets/js/flashCSS-1.0.8.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-1.1.0.module.min.js'
 </script>
 ```
 
@@ -56,7 +56,7 @@ window.addEventListener("DOMContentLoaded", function () {
 ```javascript
 var css = new flashCSS({
     observe: false, // default
-        media: {
+    media: {
         xs: 0,    // default
         sm: 576,  // default
         md: 768,  // default
@@ -106,7 +106,7 @@ var css = new flashCSS({
 	Currently only supports para on below:
 ```javascript
 {
-// Display
+    // Display
     "d": ["display"],
     "flexDir": ["flex-direction"],
     "justifyContent": ["justify-content"],
@@ -138,7 +138,7 @@ var css = new flashCSS({
     "colCount": ["column-count"],
     "colGap": ["column-gap"],
     "colSpan": ["column-span"],
-    "rowGap": ["row-gap"], // new
+    "rowGap": ["row-gap"],
     // Padding
     "p" : ["padding"],
     "pr": ["padding-right"],
@@ -166,6 +166,9 @@ var css = new flashCSS({
     "fh": ["line-height"],
     "fa": ["text-align"],
     "fw": ["font-weight"],
+    "fd": ["text-decoration"], // new
+    "fi": ["text-indent"], // new
+    "ft": ["text-transform"], // new
     // Border
     "br": ["border"],
     "bw": ["border-width"],
@@ -177,26 +180,36 @@ var css = new flashCSS({
     "sdt": ["text-shadow"],
     // Color
     "color": ["color"],
+    "filter": ["filter"],
+    "blend": ["mix-blend-mode"],
     // Background
     "bg"   : ["background"],
     "bgc"  : ["background-color"],
-    // Others
+    "bgi"  : ["background-image"], // new
+    "bgs"  : ["background-size"], // new
+    "bgp"  : ["background-position"], // new
+    "bgr"  : ["background-repeat"], // new
+    "bgo"  : ["background-origin"], // new
+    // Transform
     "ts": ["transition"],
     "tf": ["transform"],
     "tfStyle": ["transform-style"],
     "tfOrigin": ["transform-origin"],
+    // Others
     "tt": ["text-transform"],
     "o": ["opacity"],
     "ov": ["overflow"],
     "ws": ["white-space"],
-    "pointer": ["pointer-events"],
     "z": ["z-index"],
     "objFit": ["object-fit"],
     "objPos": ["object-position"],
     "ani": ["animation"],
-    "filter": ["filter"],
-    "blend": ["mix-blend-mode"],
     "ratio": ["aspect-ratio"],
+    "pointer": ["pointer-events"],
+    "cursor": ["cursor"], // new
+    "uSelect": ["user-select"], // new
+    "va": ["vertical-align"], // new
+    "wm": ["writing-mode"], // new
 };
 ```
 
