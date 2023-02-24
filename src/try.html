@@ -64,19 +64,31 @@
     <!-- End Main -->
 
     <!-- Start JS -->
-    <script src="assets/js/flashCSS-1.1.0.js"></script>
+    <script src="assets/js/flashCSS-1.2.0.js"></script>
     <script>
-        var css;
 
         window.addEventListener("DOMContentLoaded", function () {
             // INIT flashCSS
-            css = new flashCSS({
+            var css = new flashCSS({
+                showPara: true,
+                showMedia: true,
                 observe: true,
                 important: false,
                 style: "head",
                 link: "-",
                 onCompleted: function(){
                     console.log("flashCSS Completed");
+                },
+                setMedia: {
+                    sm: "200px",
+                    xxl: "1500px"
+                },
+                setStyle: {
+                    "box": ["box-sizing"],
+                    "atl": ["top","left"],
+                },
+                setSymbol: {
+                    "!": " !important"
                 }
             });
 

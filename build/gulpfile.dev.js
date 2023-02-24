@@ -102,10 +102,15 @@ function dev() {
         },
             function () {
                 browserSync.init({
-                    baseDir: "./dist/",
-                    proxy: "localhost:8010",
-                    open: true,
-                    notify: false,
+                    server: {
+                        baseDir: './dist/',
+                    },
+                    port: 8010,
+                    //   reloadDelay: 2000,
+                    // baseDir: "./dist/",
+                    // proxy: "localhost:8010",
+                    // open: true,
+                    // notify: false,
                     https: true
                 });
             });

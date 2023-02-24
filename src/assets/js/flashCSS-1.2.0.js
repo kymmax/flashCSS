@@ -1,9 +1,9 @@
 /*!
- * flashCSS 1.1.0
- * 2022-07-12
+ * flashCSS 1.2.0
+ * 2023-02-24
  * https://github.com/kymmax/flashCSS
  * 
- * @license Copyright 2022, flashCSS. All rights reserved.
+ * @license Copyright 2023, flashCSS. All rights reserved.
  * @author: Jason Kuo, kymmax0420@gmail.com
  * 
  * Licensed MIT
@@ -15,14 +15,14 @@ function flashCSS( PARA ) {
 
 	var _self = this;
 
-
 	// Media Query for Size
 	var _para_media = {
 		xs: 0 + "px", // default
-		sm: (PARA.media && PARA.media.sm ? PARA.media.sm : 576 ) + "px",
-		md: (PARA.media && PARA.media.md ? PARA.media.md : 768 ) + "px",
-		lg: (PARA.media && PARA.media.lg ? PARA.media.lg : 992 ) + "px",
-		xl: (PARA.media && PARA.media.xl ? PARA.media.xl : 1280 ) + "px",
+		sm: "576px",
+		md: "768px",
+		lg: "992px",
+		xl: "1280px",
+		...PARA.setMedia // new for custom media
 	};
 	var _para_media_string = "";
 	Object.keys(_para_media).forEach(function(media,index,string){
@@ -66,6 +66,9 @@ function flashCSS( PARA ) {
 		"colGap": ["column-gap"],
 		"colSpan": ["column-span"],
 		"rowGap": ["row-gap"],
+		"g": ["gap"], // new
+		"placeContent": ["place-content"], // new
+		"placeItems": ["place-items"], // new
 		// Padding
 		"p" : ["padding"],
 		"pr": ["padding-right"],
@@ -93,9 +96,9 @@ function flashCSS( PARA ) {
 		"fh": ["line-height"],
 		"fa": ["text-align"],
 		"fw": ["font-weight"],
-		"fd": ["text-decoration"], // new
-		"fi": ["text-indent"], // new
-		"ft": ["text-transform"], // new
+		"fd": ["text-decoration"],
+		"fi": ["text-indent"],
+		"ft": ["text-transform"],
 		// Border
 		"br": ["border"],
 		"bw": ["border-width"],
@@ -112,17 +115,18 @@ function flashCSS( PARA ) {
 		// Background
 		"bg"   : ["background"],
 		"bgc"  : ["background-color"],
-		"bgi"  : ["background-image"], // new
-		"bgs"  : ["background-size"], // new
-		"bgp"  : ["background-position"], // new
-		"bgr"  : ["background-repeat"], // new
-		"bgo"  : ["background-origin"], // new
+		"bgi"  : ["background-image"],
+		"bgs"  : ["background-size"],
+		"bgp"  : ["background-position"],
+		"bgr"  : ["background-repeat"],
+		"bgo"  : ["background-origin"],
 		// Transform
 		"ts": ["transition"],
 		"tf": ["transform"],
 		"tfStyle": ["transform-style"],
 		"tfOrigin": ["transform-origin"],
 		// Others
+		"float": ["float"], // new
 		"tt": ["text-transform"],
 		"o": ["opacity"],
 		"ov": ["overflow"],
@@ -133,10 +137,11 @@ function flashCSS( PARA ) {
 		"ani": ["animation"],
 		"ratio": ["aspect-ratio"],
 		"pointer": ["pointer-events"],
-		"cursor": ["cursor"], // new
-		"uSelect": ["user-select"], // new
-		"va": ["vertical-align"], // new
-		"wm": ["writing-mode"], // new
+		"cursor": ["cursor"],
+		"select": ["user-select"], // fix
+		"va": ["vertical-align"],
+		"wm": ["writing-mode"],
+		...PARA.setStyle // new for custom style
 	};
 	var _para_spacing_string = "";
 	Object.keys( _para_spacing).forEach(function(item,index,string){
@@ -147,16 +152,17 @@ function flashCSS( PARA ) {
 
 	// Symbol Para
 	var _para_symbol = {
-		"." : ".", // dot
-		"neg" : "-", // negative
-		"%" : "%", // percent
+		".": ".", // dot
+		"neg": "-", // negative
+		"%": "%", // percent
 		"#": "#", // color hash code
-		"_"   : " ", // space
+		"_": " ", // space
 		",": ",", // comma
 		"(": "(", // bracket - L
 		")": ")", // bracket - R
 		"/": "/", // slash
 		"!": " !important", // important
+		...PARA.setSymbol // new for custom symbol
 	}
 	var _para_symbol_string = "";
 	Object.keys(_para_symbol).forEach(function(symbol,index,string){
@@ -360,7 +366,12 @@ function flashCSS( PARA ) {
 	if (PARA.observe) {
 		this.observer();
 	}
-
+	if (PARA.showPara) {
+		console.table(_para_spacing);
+	}
+	if (PARA.showMedia) {
+		console.table(_para_media);
+	}
 
 	// reInit
 	this.reInit = function(){
