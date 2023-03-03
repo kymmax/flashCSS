@@ -1,5 +1,5 @@
 # flashCSS
-A quick way to customize css from html class name.
+A quick way to generate & customize css from html class name.
 
 [DEMO](https://kymmax.github.io/flashCSS/src/demo.html) & [TRY](https://kymmax.github.io/flashCSS/src/try.html)
 ```html
@@ -7,21 +7,23 @@ A quick way to customize css from html class name.
 ```
 
 ## Features
-- Create CSS style from html class name.
+- Generate CSS style from HTML class name.
 - Fast to develop website.
 - More freedom to use.
-- Min JS size `~6 KB` only.
+- More custom parameter to set.
+- Add one JS file only.
+- Min JS size `~5 KB` only.
 - Save more CSS file size.
 
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.1.0.min.js"></script>
+<script src="assets/js/flashCSS-1.2.0.min.js"></script>
 ```
 or import js module.
 ```html
 <script type="module">
-    import flashCSS from '/assets/js/flashCSS-1.1.0.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-1.2.0.module.min.js'
 </script>
 ```
 
@@ -36,7 +38,6 @@ window.addEventListener("DOMContentLoaded", function () {
 (width: 25%; height: 200px; margin-top: 1rem; background-color: black)
 ```html
 <div class="w-25% h-200px mt-1rem bgc-black"></div>
-<div class="d-flex alignItems-flex-start"></div>
 ```
 
 * You can do class name as template, and save more file size.
@@ -55,31 +56,40 @@ window.addEventListener("DOMContentLoaded", function () {
 ## Parameters
 ```javascript
 var css = new flashCSS({
-    observe: false, // default
-    media: {
+    showPara: false,  // default
+    showMedia: false, // default
+    observe: false,   // default
+    important: false, // default
+    style: "head",    // default
+    link: "-",        // default
+    setMedia: {
         xs: 0,    // default
         sm: 576,  // default
         md: 768,  // default
         lg: 992,  // default
         xl: 1280, // default
     },
-    important: false, // default
-    style: 'head', // default
-    link: '-', // default
+    setStyle: {
+        "box": ["box-sizing"],
+        "atl": ["top","left"],
+    },
+    setSymbol: {
+        "!": " !important"
+    },
     onCompleted: function(){
         // after style added
-    }
+    },
 });
 ```
+- ### `showPara: Boolean` ###
+	Will show console table for style para shortcut.
+
+- ### `showMedia: Boolean` ###
+	Will show console table for media query setting.
+
 - ### `observe: Boolean` ###
 	If html class has changed which class will be update.
 	(* It will affect the performance and it is recommended to set false on official site)
-
-- ### `media: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} )` ###
-	Related to CSS @media (min-width: px), and value just like Bootstrap.
-```html
-<div class="fz-16px fz-lg-20px my-1rem my-lg-1.5rem"></div>
-```
 
 - ### `important: Boolean` ###
 	Add `!important` on all style.
@@ -98,10 +108,35 @@ var css = new flashCSS({
 <div class="d:block d:xl:none"></div>
 ```
 
+- ### `setMedia: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} )` ###
+	Related to CSS @media (min-width: px), and value just like Bootstrap.
+    You also can add additional value for yourself.
+```javascript
+var css = new flashCSS({
+    setMedia: {
+        xl: 1366, // change value 
+        xxl: 1920 // custom
+    }
+});
+```
+```html
+<div class="fz-16px fz-lg-20px my-1rem my-xxl-1.5rem"></div>
+```
+
+- ### `setSymbol: Object` ###
+	Related to style value just, and you also can add o change value for yourself.
+```javascript
+var css = new flashCSS({
+    setSymbol: {
+        "!!!": " !important" // change setting
+    },
+});
+```
+
 - ### `onCompleted: Callback()` ###
 	Do something after style added.
 
-- ### `Style ( class name : style name )` ###
+- ### `Class Name Shortcut for Style ( class name : style name )` ###
 	Use html snipset to generate CSS style.
 	Currently only supports para on below:
 ```javascript
@@ -139,6 +174,9 @@ var css = new flashCSS({
     "colGap": ["column-gap"],
     "colSpan": ["column-span"],
     "rowGap": ["row-gap"],
+    "g": ["gap"], // new
+    "placeContent": ["place-content"], // new
+    "placeItems": ["place-items"], // new
     // Padding
     "p" : ["padding"],
     "pr": ["padding-right"],
@@ -166,9 +204,9 @@ var css = new flashCSS({
     "fh": ["line-height"],
     "fa": ["text-align"],
     "fw": ["font-weight"],
-    "fd": ["text-decoration"], // new
-    "fi": ["text-indent"], // new
-    "ft": ["text-transform"], // new
+    "fd": ["text-decoration"],
+    "fi": ["text-indent"],
+    "ft": ["text-transform"],
     // Border
     "br": ["border"],
     "bw": ["border-width"],
@@ -185,17 +223,18 @@ var css = new flashCSS({
     // Background
     "bg"   : ["background"],
     "bgc"  : ["background-color"],
-    "bgi"  : ["background-image"], // new
-    "bgs"  : ["background-size"], // new
-    "bgp"  : ["background-position"], // new
-    "bgr"  : ["background-repeat"], // new
-    "bgo"  : ["background-origin"], // new
+    "bgi"  : ["background-image"],
+    "bgs"  : ["background-size"],
+    "bgp"  : ["background-position"],
+    "bgr"  : ["background-repeat"],
+    "bgo"  : ["background-origin"],
     // Transform
     "ts": ["transition"],
     "tf": ["transform"],
     "tfStyle": ["transform-style"],
     "tfOrigin": ["transform-origin"],
     // Others
+    "float": ["float"], // new
     "tt": ["text-transform"],
     "o": ["opacity"],
     "ov": ["overflow"],
@@ -206,10 +245,10 @@ var css = new flashCSS({
     "ani": ["animation"],
     "ratio": ["aspect-ratio"],
     "pointer": ["pointer-events"],
-    "cursor": ["cursor"], // new
-    "uSelect": ["user-select"], // new
-    "va": ["vertical-align"], // new
-    "wm": ["writing-mode"], // new
+    "cursor": ["cursor"],
+    "select": ["user-select"], // fix
+    "va": ["vertical-align"],
+    "wm": ["writing-mode"],
 };
 ```
 
@@ -282,12 +321,12 @@ var css = new flashCSS({
     <div class="alignItems-center"></div>
 ```
 
-- ### `reInit()` ###
-You can use `reInit()` to re-check whole html class name to generate css style.
+- ### `refresh()` ###
+You can use `refresh()` to re-check whole html class name to generate css style.
 
 ```javascript
 var css = new flashCSS();
-    css.reInit();
+    css.refresh();
 ```
 
 

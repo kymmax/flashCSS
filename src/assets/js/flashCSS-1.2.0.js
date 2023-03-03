@@ -1,6 +1,6 @@
 /*!
  * flashCSS 1.2.0
- * 2023-02-24
+ * 2023-03-03
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -9,19 +9,17 @@
  * Licensed MIT
  */
 
-function flashCSS( PARA ) {
-
-	!PARA ? PARA = {} : PARA;
+function flashCSS( PARA = {} ) {
 
 	var _self = this;
 
 	// Media Query for Size
 	var _para_media = {
-		xs: 0 + "px", // default
-		sm: "576px",
-		md: "768px",
-		lg: "992px",
-		xl: "1280px",
+		xs: 0, // default
+		sm: 576,
+		md: 768,
+		lg: 992,
+		xl: 1280,
 		...PARA.setMedia // new for custom media
 	};
 	var _para_media_string = "";
@@ -181,6 +179,7 @@ function flashCSS( PARA ) {
 		_group_media[item] = "";
 	})
 	
+	
 	// Init
 	this.init = function( DOM , isUpdate ){
 		var _class_string = DOM.getAttribute("class").split(" ");
@@ -274,10 +273,10 @@ function flashCSS( PARA ) {
 
 
 	// Set Media Query
-	this.setMedia = function(){
+	this.addMedia = function(){
 		// Add & Order Media Style
-		Object.keys(_group_media).forEach(function(media){
-			_style_list += '@media (min-width:' + _para_media[media] + ') {' + _group_media[media] + '} ';
+		Object.keys(_group_media).forEach(function(media){			
+			_style_list += '@media (min-width:' + _para_media[media] + 'px) {' + _group_media[media] + '} ';
 		})
 	}
 
@@ -285,14 +284,14 @@ function flashCSS( PARA ) {
 	this.update = function( MEDIA , CLASS_NAME ){
 
 		var _style_tag = document.querySelectorAll('style[data-css="flashCSS"]')[0];
-		var _style_content = _style_tag.textContent.split( _para_media[MEDIA] + ") {");
+		var _style_content = _style_tag.textContent.split( _para_media[MEDIA] + "px) {");
 
-		if(MEDIA){ _style_tag.textContent =  _style_content[0] + _para_media[MEDIA] + ") {" + CLASS_NAME + _style_content[1];}
+		if(MEDIA){ _style_tag.textContent =  _style_content[0] + _para_media[MEDIA] + "px) {" + CLASS_NAME + _style_content[1];}
 		else{ _style_tag.textContent = [ CLASS_NAME, _style_tag.textContent ].join(" ");}
 	}
 
 	// Set Style Tag
-	this.setTag = function(){
+	this.addTag = function(){
 	
 		var _style = document.createElement('style');
 			_style.type = 'text/css';
@@ -316,7 +315,6 @@ function flashCSS( PARA ) {
 		var observer = new MutationObserver(function (mutations) {
 			mutations.forEach(function (mutation) {
 				if (mutation.attributeName === "class") {
-					console.log("Class attribute changed");
 					_self.init(mutation.target,true);
 				}
 			});
@@ -373,8 +371,8 @@ function flashCSS( PARA ) {
 		console.table(_para_media);
 	}
 
-	// reInit
-	this.reInit = function(){
+	// refresh
+	this.refresh = function(){
 		document.querySelectorAll("[class]").forEach(function (DOM) {
 			_self.init(DOM,true);
 		})
@@ -387,7 +385,7 @@ function flashCSS( PARA ) {
 		_self.init(DOM);
 	})
 
-	this.setMedia();
-	this.setTag();
+	this.addMedia();
+	this.addTag();
 
 }

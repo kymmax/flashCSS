@@ -1,28 +1,26 @@
 /*!
- * flashCSS 1.1.0
- * 2022-07-12
+ * flashCSS 1.2.0
+ * 2023-03-03
  * https://github.com/kymmax/flashCSS
  * 
- * @license Copyright 2022, flashCSS. All rights reserved.
+ * @license Copyright 2023, flashCSS. All rights reserved.
  * @author: Jason Kuo, kymmax0420@gmail.com
  * 
  * Licensed MIT
  */
 
-export default function flashCSS( PARA ) {
-
-	!PARA ? PARA = {} : PARA;
+export default function flashCSS( PARA = {} ) {
 
 	var _self = this;
 
-
 	// Media Query for Size
 	var _para_media = {
-		xs: 0 + "px", // default
-		sm: (PARA.media && PARA.media.sm ? PARA.media.sm : 576 ) + "px",
-		md: (PARA.media && PARA.media.md ? PARA.media.md : 768 ) + "px",
-		lg: (PARA.media && PARA.media.lg ? PARA.media.lg : 992 ) + "px",
-		xl: (PARA.media && PARA.media.xl ? PARA.media.xl : 1280 ) + "px",
+		xs: 0, // default
+		sm: 576,
+		md: 768,
+		lg: 992,
+		xl: 1280,
+		...PARA.setMedia // new for custom media
 	};
 	var _para_media_string = "";
 	Object.keys(_para_media).forEach(function(media,index,string){
@@ -66,6 +64,9 @@ export default function flashCSS( PARA ) {
 		"colGap": ["column-gap"],
 		"colSpan": ["column-span"],
 		"rowGap": ["row-gap"],
+		"g": ["gap"], // new
+		"placeContent": ["place-content"], // new
+		"placeItems": ["place-items"], // new
 		// Padding
 		"p" : ["padding"],
 		"pr": ["padding-right"],
@@ -93,9 +94,9 @@ export default function flashCSS( PARA ) {
 		"fh": ["line-height"],
 		"fa": ["text-align"],
 		"fw": ["font-weight"],
-		"fd": ["text-decoration"], // new
-		"fi": ["text-indent"], // new
-		"ft": ["text-transform"], // new
+		"fd": ["text-decoration"],
+		"fi": ["text-indent"],
+		"ft": ["text-transform"],
 		// Border
 		"br": ["border"],
 		"bw": ["border-width"],
@@ -112,17 +113,18 @@ export default function flashCSS( PARA ) {
 		// Background
 		"bg"   : ["background"],
 		"bgc"  : ["background-color"],
-		"bgi"  : ["background-image"], // new
-		"bgs"  : ["background-size"], // new
-		"bgp"  : ["background-position"], // new
-		"bgr"  : ["background-repeat"], // new
-		"bgo"  : ["background-origin"], // new
+		"bgi"  : ["background-image"],
+		"bgs"  : ["background-size"],
+		"bgp"  : ["background-position"],
+		"bgr"  : ["background-repeat"],
+		"bgo"  : ["background-origin"],
 		// Transform
 		"ts": ["transition"],
 		"tf": ["transform"],
 		"tfStyle": ["transform-style"],
 		"tfOrigin": ["transform-origin"],
 		// Others
+		"float": ["float"], // new
 		"tt": ["text-transform"],
 		"o": ["opacity"],
 		"ov": ["overflow"],
@@ -133,10 +135,11 @@ export default function flashCSS( PARA ) {
 		"ani": ["animation"],
 		"ratio": ["aspect-ratio"],
 		"pointer": ["pointer-events"],
-		"cursor": ["cursor"], // new
-		"uSelect": ["user-select"], // new
-		"va": ["vertical-align"], // new
-		"wm": ["writing-mode"], // new
+		"cursor": ["cursor"],
+		"select": ["user-select"], // fix
+		"va": ["vertical-align"],
+		"wm": ["writing-mode"],
+		...PARA.setStyle // new for custom style
 	};
 	var _para_spacing_string = "";
 	Object.keys( _para_spacing).forEach(function(item,index,string){
@@ -147,16 +150,17 @@ export default function flashCSS( PARA ) {
 
 	// Symbol Para
 	var _para_symbol = {
-		"." : ".", // dot
-		"neg" : "-", // negative
-		"%" : "%", // percent
+		".": ".", // dot
+		"neg": "-", // negative
+		"%": "%", // percent
 		"#": "#", // color hash code
-		"_"   : " ", // space
+		"_": " ", // space
 		",": ",", // comma
 		"(": "(", // bracket - L
 		")": ")", // bracket - R
 		"/": "/", // slash
 		"!": " !important", // important
+		...PARA.setSymbol // new for custom symbol
 	}
 	var _para_symbol_string = "";
 	Object.keys(_para_symbol).forEach(function(symbol,index,string){
@@ -174,6 +178,7 @@ export default function flashCSS( PARA ) {
 	Object.keys(_para_media).forEach(function(item){
 		_group_media[item] = "";
 	})
+	
 	
 	// Init
 	this.init = function( DOM , isUpdate ){
@@ -268,10 +273,10 @@ export default function flashCSS( PARA ) {
 
 
 	// Set Media Query
-	this.setMedia = function(){
+	this.addMedia = function(){
 		// Add & Order Media Style
-		Object.keys(_group_media).forEach(function(media){
-			_style_list += '@media (min-width:' + _para_media[media] + ') {' + _group_media[media] + '} ';
+		Object.keys(_group_media).forEach(function(media){			
+			_style_list += '@media (min-width:' + _para_media[media] + 'px) {' + _group_media[media] + '} ';
 		})
 	}
 
@@ -279,14 +284,14 @@ export default function flashCSS( PARA ) {
 	this.update = function( MEDIA , CLASS_NAME ){
 
 		var _style_tag = document.querySelectorAll('style[data-css="flashCSS"]')[0];
-		var _style_content = _style_tag.textContent.split( _para_media[MEDIA] + ") {");
+		var _style_content = _style_tag.textContent.split( _para_media[MEDIA] + "px) {");
 
-		if(MEDIA){ _style_tag.textContent =  _style_content[0] + _para_media[MEDIA] + ") {" + CLASS_NAME + _style_content[1];}
+		if(MEDIA){ _style_tag.textContent =  _style_content[0] + _para_media[MEDIA] + "px) {" + CLASS_NAME + _style_content[1];}
 		else{ _style_tag.textContent = [ CLASS_NAME, _style_tag.textContent ].join(" ");}
 	}
 
 	// Set Style Tag
-	this.setTag = function(){
+	this.addTag = function(){
 	
 		var _style = document.createElement('style');
 			_style.type = 'text/css';
@@ -310,7 +315,6 @@ export default function flashCSS( PARA ) {
 		var observer = new MutationObserver(function (mutations) {
 			mutations.forEach(function (mutation) {
 				if (mutation.attributeName === "class") {
-					console.log("Class attribute changed");
 					_self.init(mutation.target,true);
 				}
 			});
@@ -360,10 +364,15 @@ export default function flashCSS( PARA ) {
 	if (PARA.observe) {
 		this.observer();
 	}
+	if (PARA.showPara) {
+		console.table(_para_spacing);
+	}
+	if (PARA.showMedia) {
+		console.table(_para_media);
+	}
 
-
-	// reInit
-	this.reInit = function(){
+	// refresh
+	this.refresh = function(){
 		document.querySelectorAll("[class]").forEach(function (DOM) {
 			_self.init(DOM,true);
 		})
@@ -376,6 +385,6 @@ export default function flashCSS( PARA ) {
 		_self.init(DOM);
 	})
 
-	this.setMedia();
-	this.setTag();
+	this.addMedia();
+	this.addTag();
 }

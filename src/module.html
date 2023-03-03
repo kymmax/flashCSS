@@ -43,11 +43,32 @@
     <!-- Start JS -->
     <script type="module">
 
-        import flashCSS from '/assets/js/flashCSS-1.1.0.module.js' 
+        import flashCSS from '/assets/js/flashCSS-1.2.0.module.js' 
 
         window.addEventListener("DOMContentLoaded", function () {
             // INIT flashCSS
-            var css = new flashCSS({observe: true});
+            var css = new flashCSS({
+                showPara: true,
+                showMedia: true,
+                observe: true,
+                important: false,
+                style: "head",
+                link: "-",
+                onCompleted: function(){
+                    console.log("flashCSS Completed");
+                },
+                setMedia: {
+                    sm: 200,
+                    xxl: 1500
+                },
+                setStyle: {
+                    "box": ["box-sizing"],
+                    "atl": ["top","left"],
+                },
+                setSymbol: {
+                    "!": " !important"
+                }
+            });
 
             // DEMO
             function _(ID){
