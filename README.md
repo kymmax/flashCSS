@@ -188,7 +188,7 @@ var css = new flashCSS({
 
 ## output style
 <style>
-    .element{
+    .fz\-30mb{
         font-size: 3.125vw;
     }
 </style>
