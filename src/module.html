@@ -43,7 +43,7 @@
     <!-- Start JS -->
     <script type="module">
 
-        import flashCSS from '/assets/js/flashCSS-1.2.0.module.js' 
+        import flashCSS from '/assets/js/flashCSS-1.3.0.module.js' 
 
         window.addEventListener("DOMContentLoaded", function () {
             // INIT flashCSS
@@ -67,6 +67,32 @@
                 },
                 setSymbol: {
                     "!": " !important"
+                },
+                setLayout: {
+                    mb: 960,
+                    pc: 1920
+                },
+                setCustomVal: function( VAL ){
+
+                    var _thisLayout = this.setLayout;
+                    var _val = "";
+
+                    VAL.split(" ").forEach(( item )=>{
+                        
+                        Object.keys(_thisLayout).forEach(function(layout){
+                            
+                            if(item.includes(layout)){
+                                
+                                item = item.split(layout)[0] * (100 / _thisLayout[layout]) + "vw";
+                            }
+
+                        })
+                        
+                        _val += item + " ";
+
+                    })
+
+                    return _val;
                 }
             });
 

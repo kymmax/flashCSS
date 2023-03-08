@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.2.0
- * 2023-03-03
+ * flashCSS 1.3.0
+ * 2023-03-08
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -237,6 +237,11 @@ export default function flashCSS( PARA = {} ) {
 				
 			}
 
+			// # for custom function for value
+			if (PARA.setCustomVal) {
+				_style_item_value = PARA.setCustomVal(_style_item_value);
+			}
+
 			/////////////////////////////////////////////////////
 
 			// # Merge Class
@@ -279,6 +284,7 @@ export default function flashCSS( PARA = {} ) {
 			_style_list += '@media (min-width:' + _para_media[media] + 'px) {' + _group_media[media] + '} ';
 		})
 	}
+
 
 	// Set Update
 	this.update = function( MEDIA , CLASS_NAME ){
@@ -338,6 +344,7 @@ export default function flashCSS( PARA = {} ) {
 		} : null;
 	}
 
+
 	// Copy from '@' to '='
 	this.copy = function( DOM ){
 		var _class_all_name = DOM.getAttribute("class");
@@ -355,11 +362,9 @@ export default function flashCSS( PARA = {} ) {
 
 							i_copy.setAttribute("class", _target_str); // remove ~ str
 						})
-					
 				}
 			})
 	}
-
 
 	if (PARA.observe) {
 		this.observer();
@@ -370,6 +375,7 @@ export default function flashCSS( PARA = {} ) {
 	if (PARA.showMedia) {
 		console.table(_para_media);
 	}
+
 
 	// refresh
 	this.refresh = function(){

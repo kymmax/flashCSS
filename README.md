@@ -18,12 +18,12 @@ A quick way to generate & customize css from html class name.
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.2.0.min.js"></script>
+<script src="assets/js/flashCSS-1.3.0.min.js"></script>
 ```
 or import js module.
 ```html
 <script type="module">
-    import flashCSS from '/assets/js/flashCSS-1.2.0.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-1.3.0.module.min.js'
 </script>
 ```
 
@@ -76,6 +76,10 @@ var css = new flashCSS({
     setSymbol: {
         "!": " !important"
     },
+    setCustomVal: function( VAL ){
+        // custom function here
+        return VAL;
+    },
     onCompleted: function(){
         // after style added
     },
@@ -123,6 +127,17 @@ var css = new flashCSS({
 <div class="fz-16px fz-lg-20px my-1rem my-xxl-1.5rem"></div>
 ```
 
+- ### `setStyle: Object` ###
+	Related to style value just, and you also can add o change value for yourself.
+```javascript
+var css = new flashCSS({
+    setStyle: {
+        "box": ["box-sizing"],
+        "atl": ["top","left"],
+    },
+});
+```
+
 - ### `setSymbol: Object` ###
 	Related to style value just, and you also can add o change value for yourself.
 ```javascript
@@ -131,6 +146,52 @@ var css = new flashCSS({
         "!!!": " !important" // change setting
     },
 });
+```
+
+- ### `setCustomVal: return style value` ###
+	Do something before output style.
+    Example as below, this demo change the `px` to `vw` base on layout device.
+
+```javascript
+var css = new flashCSS({
+    setLayout: {
+        mb: 960,
+        pc: 1920
+    },
+    setCustomVal: function( VAL ){
+
+        var _thisLayout = this.setLayout;
+        var _val = "";
+
+        VAL.split(" ").forEach(( item )=>{
+            
+            Object.keys(_thisLayout).forEach(function(layout){
+                
+                if(item.includes(layout)){
+                    
+                    item = item.split(layout)[0] * (100 / _thisLayout[layout]) + "vw";
+                }
+
+            })
+            
+            _val += item + " ";
+
+        })
+
+        return _val;
+    }
+});
+```
+```html
+## input class
+<div class="fz-30mb"></div>
+
+## output style
+<style>
+    .element{
+        font-size: 3.125vw;
+    }
+</style>
 ```
 
 - ### `onCompleted: Callback()` ###
