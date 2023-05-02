@@ -12,7 +12,7 @@ A quick way to generate & customize css from html class name.
 - More freedom to use.
 - More custom parameter to set.
 - Add one JS file only.
-- Min JS size `~5 KB` only.
+- Min JS size `~6 KB` only.
 - Save more CSS file size.
 
 ## How to Use?
@@ -59,6 +59,7 @@ var css = new flashCSS({
     showPara: false,  // default
     showMedia: false, // default
     observe: false,   // default
+    observeDOM: false,// default
     important: false, // default
     style: "head",    // default
     link: "-",        // default
@@ -75,6 +76,9 @@ var css = new flashCSS({
     },
     setSymbol: {
         "!": " !important"
+    },
+    setTemplate: {
+        "img-abs": "ps-absolute at-0 al-0"
     },
     setCustomVal: function( VAL ){
         // custom function here
@@ -95,6 +99,9 @@ var css = new flashCSS({
 	If html class has changed which class will be update.
 	(* It will affect the performance and it is recommended to set false on official site)
 
+- ### `observeDOM: Boolean` ###
+	If DOM element has added which class will be update.
+
 - ### `important: Boolean` ###
 	Add `!important` on all style.
 
@@ -103,8 +110,8 @@ var css = new flashCSS({
 	You can change it for `body` or `html`.
 
 - ### `link: String (class link)` ###
-	You can change class name dash from `-` to `~ # $ ^ & * + :`, and other symbols.
-    (Can't use `@` and `=` now.)
+	You can change class name dash from `-` to `~ # $ ^ & * +`, and other symbols.
+    (Can't use `@`, `=`, `:` now.)
 ```html
 ## -
 <div class="d-block d-xl-none"></div>
@@ -146,6 +153,23 @@ var css = new flashCSS({
         "!!!": " !important" // change setting
     },
 });
+```
+
+- ### `setTemplate: Object` ###
+	You can create the custom template as `=templateName`, just like class name.
+```javascript
+var css = new flashCSS({
+    setTemplate: {
+        "img-abs": "ps-absolute at-0 al-0"
+    },
+});
+```
+```html
+## input class
+<div class="=img-abs"></div>
+
+## output class
+<div class="ps-absolute at-0 al-0"></div>
 ```
 
 - ### `setCustomVal: return style value` ###
@@ -317,6 +341,7 @@ var css = new flashCSS({
 	Use some snipset to correspond to the symbol, because some symbols can't be class name.
 ```javascript
 {
+    ":": ":", // for style value directly ( class name w/o space )
     "." : ".", // dot
     "neg" : "-", // negative
     "%" : "%", // percent
@@ -330,6 +355,10 @@ var css = new flashCSS({
 }
 ```
 ```html
+## Colon 
+    // write style value directly ( class name w/o space )
+    <div class="bg-linear-gradient(180deg,rgba(245,131,49,1)0%,rgba(121,55,40,1)100%);"></div>
+
 ## Dot
     // width: 50.5px;
     <div class="w-50.5px"></div>
