@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.4.0
- * 2023-05-02
+ * flashCSS 1.5.0
+ * 2023-05-03
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -9,7 +9,7 @@
  * Licensed MIT
  */
 
-function flashCSS( PARA = {} ) {
+export default function flashCSS( PARA = {} ) {
 
 	var _self = this;
 
@@ -150,7 +150,8 @@ function flashCSS( PARA = {} ) {
 
 	// Symbol Para
 	var _para_symbol = {
-		":": ":", // for style value directly ( class name w/o space )
+		":": ":", // for pseudo type
+		"~": "~", // for style value directly ( class name w/o space )
 		".": ".", // dot
 		"neg": "-", // negative
 		"%": "%", // percent
@@ -245,8 +246,19 @@ function flashCSS( PARA = {} ) {
 			}
 
 			// # for style value directly ( class name w/o space)
+			if(_style_item_value.includes("~")){
+				_style_item_value = _style_item_value.replace("~","");
+			}
+
+			// # for pseudo type
+			let _pseudo = false,
+				_pseudo_type;
 			if(_style_item_value.includes(":")){
-				_style_item_value = _style_item_value.replace(":","");
+				_pseudo = true;
+
+				var _pseudo_item = _style_item_value.split("-");
+				_pseudo_type = _pseudo_item[0].split(":")[1];
+				_style_item_value = _pseudo_item[1];
 			}
 
 			/////////////////////////////////////////////////////
@@ -266,7 +278,7 @@ function flashCSS( PARA = {} ) {
 			})
 
 			//  # Class + Value
-			var _string_temp = '.'+_class_string_merge +'{' + _string_group + '} ';
+			var _string_temp = '.' + _class_string_merge + ( _pseudo ? ':' + _pseudo_type : '' )  +'{' + _string_group + '} ';
 
 			// # Update
 			if(isUpdate) return _self.update(_class_media, _string_temp);

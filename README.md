@@ -18,12 +18,12 @@ A quick way to generate & customize css from html class name.
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.3.0.min.js"></script>
+<script src="assets/js/flashCSS-1.5.0.min.js"></script>
 ```
 or import js module.
 ```html
 <script type="module">
-    import flashCSS from '/assets/js/flashCSS-1.3.0.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-1.5.0.module.min.js'
 </script>
 ```
 
@@ -110,8 +110,8 @@ var css = new flashCSS({
 	You can change it for `body` or `html`.
 
 - ### `link: String (class link)` ###
-	You can change class name dash from `-` to `~ # $ ^ & * +`, and other symbols.
-    (Can't use `@`, `=`, `:` now.)
+	You can change class name dash from `-` to `# $ ^ & * +`, and other symbols.
+    (Can't use `@`, `=`, `:`, `~` now.)
 ```html
 ## -
 <div class="d-block d-xl-none"></div>
@@ -341,7 +341,8 @@ var css = new flashCSS({
 	Use some snipset to correspond to the symbol, because some symbols can't be class name.
 ```javascript
 {
-    ":": ":", // for style value directly ( class name w/o space )
+    ":": ":", // for pseudo type
+    "~": "~", // for style value directly ( class name w/o space )
     "." : ".", // dot
     "neg" : "-", // negative
     "%" : "%", // percent
@@ -356,8 +357,13 @@ var css = new flashCSS({
 ```
 ```html
 ## Colon 
+    // pseudo type
+    <div class="tf-:hover-scale(1.1)"></div>
+    <div class="bg-:active-red"></div>
+
+## Tilde 
     // write style value directly ( class name w/o space )
-    <div class="bg-linear-gradient(180deg,rgba(245,131,49,1)0%,rgba(121,55,40,1)100%);"></div>
+    <div class="bg-~linear-gradient(180deg,rgba(245,131,49,1)0%,rgba(121,55,40,1)100%)"></div>
 
 ## Dot
     // width: 50.5px;
