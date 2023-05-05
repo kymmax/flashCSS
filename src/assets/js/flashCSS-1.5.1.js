@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.5.0
- * 2023-05-03
+ * flashCSS 1.5.1
+ * 2023-05-05
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -125,7 +125,6 @@ function flashCSS( PARA = {} ) {
 		"tfOrigin": ["transform-origin"],
 		// Others
 		"float": ["float"], // new
-		"tt": ["text-transform"],
 		"o": ["opacity"],
 		"ov": ["overflow"],
 		"ws": ["white-space"],
@@ -150,27 +149,33 @@ function flashCSS( PARA = {} ) {
 
 	// Symbol Para
 	var _para_symbol = {
-		":": ":", // for pseudo type
-		"~": "~", // for style value directly ( class name w/o space )
+		":": ":", // colon for pseudo type
+		"~": "~", // tilde for style value directly ( class name w/o space )
 		".": ".", // dot
 		"neg": "-", // negative
-		"%": "%", // percent
+		"@": "@", // at
 		"#": "#", // color hash code
+		"$": "$", // money
+		"%": "%", // percent
+		"^": "^", // caret
+		"&": "&", // and
+		"*": "*", // star
+		"`": "`", // backquote
 		"_": " ", // space
 		",": ",", // comma
 		"(": "(", // bracket - L
 		")": ")", // bracket - R
 		"/": "/", // slash
-		"!": " !important", // important
+		"?": "?", // search
+		"!": " !important", // exclamation for important
 		...PARA.setSymbol // new for custom symbol
 	}
 	var _para_symbol_string = "";
 	Object.keys(_para_symbol).forEach(function(symbol,index,string){
-		if(symbol.match(/([(]|[)]|[.])/g)) symbol = "[" + symbol + "]";
-		_para_symbol_string += symbol + ((index==string.length-1) ? "" : "|");
+		_para_symbol_string += symbol.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ((index==string.length-1) ? "" : "|");
 	})
 	var _para_symbol_reg = new RegExp("("+ _para_symbol_string +")", "g");
-
+	
 
 	// Style Para
 	var _class_link = (PARA.link) ? PARA.link : "-";  // (d-block, d-xl-block) (d-:block, d:xl:block)
@@ -237,7 +242,6 @@ function flashCSS( PARA = {} ) {
 				var _hex = _style_item_value.split("#")[1].substring(0,6);
 				var _rgb = _self.hexToRgb("#" + _hex);
 				_style_item_value = _style_item_value.replace("#" + _hex, _rgb.r + "," + _rgb.g + "," + _rgb.b )
-				
 			}
 
 			// # for custom function for value

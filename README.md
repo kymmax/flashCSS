@@ -18,12 +18,12 @@ A quick way to generate & customize css from html class name.
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.5.0.min.js"></script>
+<script src="assets/js/flashCSS-1.5.1.min.js"></script>
 ```
 or import js module.
 ```html
 <script type="module">
-    import flashCSS from '/assets/js/flashCSS-1.5.0.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-1.5.1.module.min.js'
 </script>
 ```
 
@@ -259,9 +259,9 @@ var css = new flashCSS({
     "colGap": ["column-gap"],
     "colSpan": ["column-span"],
     "rowGap": ["row-gap"],
-    "g": ["gap"], // new
-    "placeContent": ["place-content"], // new
-    "placeItems": ["place-items"], // new
+    "g": ["gap"],
+    "placeContent": ["place-content"],
+    "placeItems": ["place-items"],
     // Padding
     "p" : ["padding"],
     "pr": ["padding-right"],
@@ -319,8 +319,7 @@ var css = new flashCSS({
     "tfStyle": ["transform-style"],
     "tfOrigin": ["transform-origin"],
     // Others
-    "float": ["float"], // new
-    "tt": ["text-transform"],
+    "float": ["float"],
     "o": ["opacity"],
     "ov": ["overflow"],
     "ws": ["white-space"],
@@ -331,7 +330,7 @@ var css = new flashCSS({
     "ratio": ["aspect-ratio"],
     "pointer": ["pointer-events"],
     "cursor": ["cursor"],
-    "select": ["user-select"], // fix
+    "select": ["user-select"],
     "va": ["vertical-align"],
     "wm": ["writing-mode"],
 };
@@ -341,18 +340,25 @@ var css = new flashCSS({
 	Use some snipset to correspond to the symbol, because some symbols can't be class name.
 ```javascript
 {
-    ":": ":", // for pseudo type
-    "~": "~", // for style value directly ( class name w/o space )
-    "." : ".", // dot
-    "neg" : "-", // negative
-    "%" : "%", // percent
+    ":": ":", // colon for pseudo type
+    "~": "~", // tilde for style value directly ( class name w/o space )
+    ".": ".", // dot
+    "neg": "-", // negative
+    "@": "@", // at
     "#": "#", // color hash code
-    "_"   : " ", // space
+    "$": "$", // money
+    "%": "%", // percent
+    "^": "^", // caret
+    "&": "&", // and
+    "*": "*", // star
+    "`": "`", // backquote
+    "_": " ", // space
     ",": ",", // comma
     "(": "(", // bracket - L
     ")": ")", // bracket - R
     "/": "/", // slash
-    "!": " !important", // important
+    "?": "?", // search
+    "!": " !important", // exclamation for important
 }
 ```
 ```html
