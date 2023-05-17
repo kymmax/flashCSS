@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.5.1
- * 2023-05-05
+ * flashCSS 1.5.2
+ * 2023-05-17
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -9,7 +9,7 @@
  * Licensed MIT
  */
 
-function flashCSS( PARA = {} ) {
+export default function flashCSS( PARA = {} ) {
 
 	var _self = this;
 
@@ -208,6 +208,7 @@ function flashCSS( PARA = {} ) {
 			// # for Class Media
 			var _class_media_match = false;
 			var _class_second = i.split(_class_link)[1];
+			if(!_class_second) return;
 			var _class_media = _class_second.replace(_para_media_reg,function(match, offset, string){
 					_class_media_match = true;
 					return match;

@@ -18,12 +18,12 @@ A quick way to generate & customize css from html class name.
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.5.1.min.js"></script>
+<script src="assets/js/flashCSS-1.5.2.min.js"></script>
 ```
 or import js module.
 ```html
 <script type="module">
-    import flashCSS from '/assets/js/flashCSS-1.5.1.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-1.5.2.module.min.js'
 </script>
 ```
 
