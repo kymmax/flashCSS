@@ -23,7 +23,7 @@ A quick way to generate & customize css from html class name.
 or import js module.
 ```html
 <script type="module">
-    import flashCSS from '/assets/js/flashCSS-1.5.2.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-1.5.3.module.min.js'
 </script>
 ```
 
