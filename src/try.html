@@ -34,6 +34,7 @@
         body {
             margin: 0;
             padding: 0;
+            background: #191919;
         }
         *{
             box-sizing: border-box;
@@ -45,31 +46,35 @@
 <body>
 
     <!-- Stat Main -->
-    <div class="wrapper =img-abs">
+    <div class="wrapper">
 
-        <h1 class="ps-fixed w-100vw fa-center d-block"><a href="https://github.com/kymmax/flashCSS" class="color-gray fz-2rem fl-.1em" style="text-decoration: none;">flashCSS<span class="fz-1rem">@Github</span></a></h1>
+        <h1 class="=img-abs w-100vw fa-center d-block"><a href="https://github.com/kymmax/flashCSS" class="color-white fz-2rem fl-.1em" style="text-decoration: none;">flashCSS<span class="fz-1rem">@Github</span></a></h1>
 
-        <div class="demo-block w-100vw h-100vh d-flex flexDir-column justifyContent-center">
-            <div id="demo_1" class="w-100% bg-gray">
-                <div class="w-100%">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste sed pariatur, debitis provident officiis maxime voluptates exercitationem esse error, saepe unde beatae numquam eius blanditiis sequi quae dolore at libero doloribus sunt, illo eligendi maiores vel? Maiores, culpa alias magni at ea fugit deserunt ipsam explicabo error commodi perferendis.</div>
+        <div class="demo-block w-100vw h-100vh d-flex flexDir-column justifyContent-center px-2rem">
+
+            <div class="bg-white">
+                <div id="demo_1" class="w-100% bg-gray color-white p-3rem">
+                    <div class="w-100%">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste sed pariatur, debitis provident officiis maxime voluptates exercitationem esse error, saepe unde beatae numquam eius blanditiis sequi quae dolore at libero doloribus sunt, illo eligendi maiores vel? Maiores, culpa alias magni at ea fugit deserunt ipsam explicabo error commodi perferendis.</div>
+                </div>
             </div>
+
             <div class="mt-3rem fa-center">
-                <label for="input" class="d-block fz-24px mb-1rem">↓↓ Try & Enter Here ↓↓</label>
-                <input id="input" type="text" class="w-80% mx-auto fz-24px fh-3rem" placeholder="w-100% bg-gray">
+                <label for="input" class="d-block color-white fz-24px mb-1rem">↓↓ Try & Enter Here ↓↓</label>
+                <input id="input" type="text" class="w-80% mx-auto px-10px fz-24px fh-3rem" placeholder="w-100% bg-gray color-white p-3rem">
             </div>
         </div>
-
 
     </div>
     <!-- End Main -->
 
     <!-- Start JS -->
-    <script src="assets/js/flashCSS-1.5.2.js"></script>
+    <script src="assets/js/flashCSS-1.5.3.js"></script>
     <script>
 
         window.addEventListener("DOMContentLoaded", function () {
             // INIT flashCSS
             var css = new flashCSS({
+                target: ".wrapper",
                 showPara: true,
                 showMedia: true,
                 observe: true,

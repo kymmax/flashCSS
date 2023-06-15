@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.5.2
- * 2023-05-17
+ * flashCSS 1.5.3
+ * 2023-06-15
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -9,7 +9,7 @@
  * Licensed MIT
  */
 
-export default function flashCSS( PARA = {} ) {
+function flashCSS( PARA = {} ) {
 
 	var _self = this;
 
@@ -190,7 +190,10 @@ export default function flashCSS( PARA = {} ) {
 	// Init
 	this.init = function( DOM , isUpdate ){
 
-		var _class_string = DOM.getAttribute("class").split(" ");
+		var _class_string = DOM.getAttribute("class");
+		if(_class_string == null) return;
+			_class_string = _class_string.split(" ");
+
 		_class_string.forEach(function (i) { // get each class name
 			
 			// # for Class Head
@@ -244,16 +247,19 @@ export default function flashCSS( PARA = {} ) {
 				var _rgb = _self.hexToRgb("#" + _hex);
 				_style_item_value = _style_item_value.replace("#" + _hex, _rgb.r + "," + _rgb.g + "," + _rgb.b )
 			}
+			
 
 			// # for custom function for value
 			if (PARA.setCustomVal) {
 				_style_item_value = PARA.setCustomVal(_style_item_value);
 			}
 
+
 			// # for style value directly ( class name w/o space)
 			if(_style_item_value.includes("~")){
 				_style_item_value = _style_item_value.replace("~","");
 			}
+
 
 			// # for pseudo type
 			let _pseudo = false,
@@ -263,7 +269,9 @@ export default function flashCSS( PARA = {} ) {
 
 				var _pseudo_item = _style_item_value.split("-");
 				_pseudo_type = _pseudo_item[0].split(":")[1];
-				_style_item_value = _pseudo_item[1];
+
+
+				_style_item_value = _style_item_value.split(_pseudo_type + "-")[1];
 			}
 
 			/////////////////////////////////////////////////////
@@ -302,7 +310,13 @@ export default function flashCSS( PARA = {} ) {
 
 	// Basic Function
 	function elAll( EL ){
-		return document.querySelectorAll( EL );
+		let _container = document.querySelector( PARA.target ? PARA.target : "html" );
+		let _elements = _container.querySelectorAll( EL );
+		
+		let _array = Array.from(_elements);
+			// _array.push(_container);		
+
+		return _array;
 	}
 
 	// Set Media Query
@@ -316,7 +330,7 @@ export default function flashCSS( PARA = {} ) {
 	// Set Update
 	this.update = function( MEDIA , CLASS_NAME ){
 
-		var _style_tag = elAll('style[data-css="flashCSS"]')[0];
+		var _style_tag = document.querySelectorAll('style[data-css="flashCSS"]')[0];
 		var _style_content = _style_tag.textContent.split( _para_media[MEDIA] + "px) {");
 
 		if(MEDIA){ _style_tag.textContent =  _style_content[0] + _para_media[MEDIA] + "px) {" + CLASS_NAME + _style_content[1];}
@@ -348,6 +362,7 @@ export default function flashCSS( PARA = {} ) {
 		const observer = new MutationObserver(function (mutations) {
 			mutations.forEach(function (mutation) {
 				if (mutation.attributeName === "class") {
+					_self.template();
 					_self.init(mutation.target,true);
 				}
 			});
@@ -368,7 +383,10 @@ export default function flashCSS( PARA = {} ) {
 					// check new element added?
 					for (let addedNode of mutation.addedNodes) {
 						if (addedNode.nodeType === Node.ELEMENT_NODE) {
-							if(addedNode.hasAttribute("class")) _self.init(addedNode, true);
+							if(addedNode.hasAttribute("class")){
+								_self.template();
+								_self.init(addedNode, true);
+							}
 						}
 					}
 				}
@@ -392,6 +410,8 @@ export default function flashCSS( PARA = {} ) {
 	// Copy from '@' to '='
 	this.copy = function( DOM ){
 		var _class_all_name = DOM.getAttribute("class");
+		if(_class_all_name == null) return;
+		
 		var _class_all_group = _class_all_name.split(" ");
 			_class_all_group.forEach(function(name){
 				if(name.match(/^@/g)){
@@ -413,20 +433,20 @@ export default function flashCSS( PARA = {} ) {
 	// Copy Template
 	this.template = function(){
 		if(PARA.setTemplate){
+			
 			Object.keys(PARA.setTemplate).forEach(function(i){
+				
 				elAll('.\\=' + i).forEach(function (DOM) {
+					
 					var _target_class = DOM.getAttribute("class");
+					if(_target_class == null) return;
+					
 					var _target_str = _target_class.replace("="+i, PARA.setTemplate[i]);
 					DOM.setAttribute("class", _target_str); // remove ~ str
 				})
 			})
 		}
 	}
-
-	if (PARA.observe) this.observer();
-	if (PARA.observeDOM) this.observerDOM();
-	if (PARA.showPara) console.table(_para_spacing);
-	if (PARA.showMedia) console.table(_para_media);
 
 	// refresh
 	this.refresh = function(){
@@ -446,4 +466,9 @@ export default function flashCSS( PARA = {} ) {
 
 	this.addMedia();
 	this.addTag();
+
+	if (PARA.observe) this.observer();
+	if (PARA.observeDOM) this.observerDOM();
+	if (PARA.showPara) console.table(_para_spacing);
+	if (PARA.showMedia) console.table(_para_media);
 }

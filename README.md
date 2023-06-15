@@ -18,7 +18,7 @@ A quick way to generate & customize css from html class name.
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.5.2.min.js"></script>
+<script src="assets/js/flashCSS-1.5.3.min.js"></script>
 ```
 or import js module.
 ```html
@@ -56,6 +56,7 @@ window.addEventListener("DOMContentLoaded", function () {
 ## Parameters
 ```javascript
 var css = new flashCSS({
+    target: "html",   // default
     showPara: false,  // default
     showMedia: false, // default
     observe: false,   // default
@@ -89,6 +90,9 @@ var css = new flashCSS({
     },
 });
 ```
+- ### `target: Element` ###
+	You can compile the effect only to the elements within this range.
+
 - ### `showPara: Boolean` ###
 	Will show console table for style para shortcut.
 
@@ -97,7 +101,6 @@ var css = new flashCSS({
 
 - ### `observe: Boolean` ###
 	If html class has changed which class will be update.
-	(* It will affect the performance and it is recommended to set false on official site)
 
 - ### `observeDOM: Boolean` ###
 	If DOM element has added which class will be update.
