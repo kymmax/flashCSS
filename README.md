@@ -1,6 +1,9 @@
 # flashCSS
 
-[![NPM Package][npm]][https://www.npmjs.com/package/html-flash-css]
+[![NPM Package](https://img.shields.io/npm/v/html-flash-css)](https://www.npmjs.com/package/html-flash-css)
+[![Build Size](https://img.shields.io/bundlephobia/min/html-flash-css)](https://bundlephobia.com/package/html-flash-css)
+[![NPM Downloads](https://img.shields.io/npm/dt/html-flash-css)](https://npmtrends.com/html-flash-css)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 A quick way to generate & customize css from html class name.
 
