@@ -1,4 +1,7 @@
 # flashCSS
+
+[![NPM Package][npm]][https://www.npmjs.com/package/html-flash-css]
+
 A quick way to generate & customize css from html class name.
 
 [DEMO](https://kymmax.github.io/flashCSS/src/demo.html) & [TRY](https://kymmax.github.io/flashCSS/src/try.html)
@@ -21,6 +24,16 @@ A quick way to generate & customize css from html class name.
 <script src="assets/js/flashCSS-1.5.3.min.js"></script>
 ```
 or import js module.
+
+- By npm
+```sh
+    npm i html-flash-css
+```
+```javascript
+    import flashCSS from "html-flash-css";
+```
+
+- Or
 ```html
 <script type="module">
     import flashCSS from '/assets/js/flashCSS-1.5.3.module.min.js'
