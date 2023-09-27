@@ -91,7 +91,7 @@ function App() {
     return (
         <div className="App">
             <Component_nav className="ps-fixed at-0 al-0 w-100%" />
-            <p class="fz-50px fw-bold fa-center color-orange bg-black p-10px">flashCSS with React</p>
+            <p className="fz-50px fw-bold fa-center color-orange bg-black p-10px">flashCSS with React</p>
             <Component_footer className="d-flex p-3rem" />
         </div>
     );
