@@ -18,13 +18,14 @@ A quick way to generate & customize css from html class name.
 - More freedom to use.
 - More custom parameter to set.
 - Add one JS file only.
-- Min JS size `~6 KB` only.
+- Min JS size `~7 KB` only.
 - Save more CSS file size.
+- Support React, and any class change with frameworks.
 
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.5.3.min.js"></script>
+<script src="assets/js/flashCSS-1.5.4.min.js"></script>
 ```
 or import js module.
 
@@ -39,7 +40,7 @@ import flashCSS from "html-flash-css";
 - Or
 ```html
 <script type="module">
-    import flashCSS from '/assets/js/flashCSS-1.5.3.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-1.5.4.module.min.js'
 </script>
 ```
 
@@ -67,6 +68,36 @@ window.addEventListener("DOMContentLoaded", function () {
 <div class="w-25% h-200px mt-1rem bgc-black "></div>
 <div class="w-25% h-200px mt-1rem bgc-black "></div>
 <div class="w-25% h-200px mt-1rem bgc-black  color-red"></div>
+```
+
+## Getting Started with React
+Execute the following example once under the App component.
+All component's class will compile by flashCSS method, even if the class changes.
+```javascript
+// App.js
+import { useLayoutEffect } from "react";
+import Component_nav from "./component/Component_nav";
+import Component_footer from "./component/Component_footer";
+import flashCSS from "html-flash-css";
+
+function App() {
+
+    useLayoutEffect(() => {
+        const css = new flashCSS({
+            observeDOM: true, // need to enable this
+        });
+    },[])
+
+    return (
+        <div className="App">
+            <Component_nav className="ps-fixed at-0 al-0 w-100%" />
+            <p class="fz-50px fw-bold fa-center color-orange bg-black p-10px">flashCSS with React</p>
+            <Component_footer className="d-flex p-3rem" />
+        </div>
+    );
+}
+
+export default App;
 ```
 
 ## Parameters
