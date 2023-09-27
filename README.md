@@ -103,7 +103,7 @@ export default App;
 ## Parameters
 ```javascript
 var css = new flashCSS({
-    target: "html",   // default
+    target: "body",   // default
     showPara: false,  // default
     showMedia: false, // default
     observe: false,   // default

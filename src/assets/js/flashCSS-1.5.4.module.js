@@ -312,15 +312,20 @@ export default function flashCSS( PARA = {} ) {
 	}
 
 	// Basic Function
+	let _target_container = document.querySelector( PARA.target ? PARA.target : "body" );
 	function elAll( EL ){
-		let _container = document.querySelector( PARA.target ? PARA.target : "html" );
+		let _container = _target_container;
 		let _elements = _container.querySelectorAll( EL );
 		let _array = Array.from(_elements);
 		return _array;
 	}
 	// detect el class change
 	let _observe_group = [];
+	const excludedTags = /^(head|meta|link|title|option|script|noscript|style)$/i;
 	function observeClassChanges(element) {
+
+		if(element.flashID || excludedTags.test(element.tagName)) return;
+
 		const id = new Date().getTime() + _observe_group.length; // add unique id
 		const classObserver = new MutationObserver(function(mutations) {
 			mutations.forEach(function(mutation) {
@@ -351,13 +356,24 @@ export default function flashCSS( PARA = {} ) {
 					if(index !== -1){
 						_observe_group[index].disconnect();
 						_observe_group.splice(index, 1);
-					}					
+					}	
+
+					removedNode.querySelectorAll("*").forEach((childNode) => {
+						const idDelete = childNode.flashID;
+						const index = _observe_group.findIndex(item => item.id === idDelete*1);
+
+						if(index !== -1){
+							_observe_group[index].disconnect();
+							_observe_group.splice(index, 1);
+						}	
+					})
+
 				});
 			  }
 			});
 		});
 		// detect
-		childListObserver.observe(document.body, { childList: true, subtree: true });
+		childListObserver.observe(_target_container, { childList: true, subtree: true });
 	}
 	function observeDomAdd(){
 		const observer = new MutationObserver(function(mutations) {
@@ -365,17 +381,25 @@ export default function flashCSS( PARA = {} ) {
 				if (mutation.type === 'childList') {
 					// check new element added?
 					for (let addedNode of mutation.addedNodes) {
-						if (addedNode.nodeType === Node.ELEMENT_NODE) {
+						if (addedNode.nodeType === Node.ELEMENT_NODE && !excludedTags.test(addedNode.tagName)) {
 							_self.template();
 							_self.init(addedNode, true);
-							observeClassChanges(addedNode);		
+							observeClassChanges(addedNode);	
+							
+							addedNode.querySelectorAll("*").forEach((childNode) => {
+
+								if(!excludedTags.test(childNode.tagName)){
+									_self.init(childNode, true);
+									observeClassChanges(childNode);		
+								}
+							})
 						}
 					}
 				}
 			});
 		});
 		// detect start
-		observer.observe(document.body, { childList: true, subtree: true});
+		observer.observe(_target_container, { childList: true, subtree: true});
 	}
 
 	// Set Media Query
