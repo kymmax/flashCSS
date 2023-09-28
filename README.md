@@ -7,7 +7,7 @@
 
 A quick way to generate & customize css from html class name.
 
-[DEMO](src/demo.html) & [TRY](src/try.html)
+[DEMO](https://kymmax.github.io/flashCSS/src/demo.html) & [TRY](https://kymmax.github.io/flashCSS/src/try.html)
 ```html
 <div class="d-flex ps-fixed fw-bold fl-.1em fz-16px fz-lg-20px p-1.5rem"></div>
 ```

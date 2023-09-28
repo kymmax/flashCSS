@@ -1,6 +1,6 @@
 {
   "name": "html-flash-css",
-  "version": "1.5.4-beta2",
+  "version": "1.5.4-beta4",
   "description": "A quick way to generate & customize css from html class name.",
   "main": "src/assets/js/flashCSS-1.5.4.module.min.js",
   "repository": {
