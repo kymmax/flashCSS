@@ -122,6 +122,7 @@ var css = new flashCSS({
         "box": ["box-sizing"],
         "atl": ["top","left"],
     },
+    deleteStyle: ["ani"],
     setSymbol: {
         "!": " !important"
     },
@@ -192,6 +193,14 @@ var css = new flashCSS({
         "box": ["box-sizing"],
         "atl": ["top","left"],
     },
+});
+```
+
+- ### `deleteStyle: Array` ###
+	Original style settings can be deleted.
+```javascript
+var css = new flashCSS({
+    deleteStyle: ["ani","d"],
 });
 ```
 

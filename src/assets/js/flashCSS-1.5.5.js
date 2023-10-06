@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.5.4
- * 2023-09-27
+ * flashCSS 1.5.5
+ * 2023-10-06
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -9,7 +9,7 @@
  * Licensed MIT
  */
 
-export default function flashCSS( PARA = {} ) {
+function flashCSS( PARA = {} ) {
 
 	let _self = this;
 
@@ -143,6 +143,13 @@ export default function flashCSS( PARA = {} ) {
 		"wm": ["writing-mode"],
 		...PARA.setStyle // new for custom style
 	};
+
+	if(Array.isArray(PARA.deleteStyle)){
+		PARA.deleteStyle.forEach((style) => {
+			delete _para_spacing[style];
+		})
+	}
+
 	let _para_spacing_string = "";
 	Object.keys( _para_spacing).forEach(function(item,index,string){
 		_para_spacing_string += item + ((index===string.length-1) ? "" : "|");
@@ -538,4 +545,5 @@ export default function flashCSS( PARA = {} ) {
 	(PARA.observeDOM === true) && this.observerDOM();
 	(PARA.showPara === true) && console.table(_para_spacing);
 	(PARA.showMedia === true) && console.table(_para_media);
+	
 }
