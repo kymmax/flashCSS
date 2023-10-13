@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.5.5
- * 2023-10-06
+ * flashCSS 1.5.6
+ * 2023-10-13
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -361,19 +361,23 @@ function flashCSS( PARA = {} ) {
 					const index = _observe_group.findIndex(item => item.id === idDelete*1);
 
 					if(index !== -1){
+						
 						_observe_group[index].disconnect();
 						_observe_group.splice(index, 1);
-					}	
 
-					removedNode.querySelectorAll("*").forEach((childNode) => {
-						const idDelete = childNode.flashID;
-						const index = _observe_group.findIndex(item => item.id === idDelete*1);
-
-						if(index !== -1){
+						removedNode.querySelectorAll("*").forEach((childNode) => {
+							
+							const idDelete = childNode.flashID;
+							const index = _observe_group.findIndex(item => item.id === idDelete*1);
+	
 							_observe_group[index].disconnect();
 							_observe_group.splice(index, 1);
-						}	
-					})
+						})
+					}	
+
+					// console.log("removedNode:",removedNode);
+					
+					
 
 				});
 			  }
@@ -545,5 +549,4 @@ function flashCSS( PARA = {} ) {
 	(PARA.observeDOM === true) && this.observerDOM();
 	(PARA.showPara === true) && console.table(_para_spacing);
 	(PARA.showMedia === true) && console.table(_para_media);
-	
 }

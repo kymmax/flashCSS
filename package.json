@@ -1,8 +1,8 @@
 {
   "name": "html-flash-css",
-  "version": "1.5.5",
+  "version": "1.5.6-beta",
   "description": "A quick way to generate & customize css from html class name.",
-  "main": "src/assets/js/flashCSS-1.5.5.module.min.js",
+  "main": "src/assets/js/flashCSS-1.5.6.module.min.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/kymmax/flashCSS.git"
