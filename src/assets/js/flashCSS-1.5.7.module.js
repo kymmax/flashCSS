@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.5.6
- * 2023-10-13
+ * flashCSS 1.5.7
+ * 2023-10-24
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -362,7 +362,7 @@ export default function flashCSS( PARA = {} ) {
 
 					if(index !== -1){
 						
-						_observe_group[index].disconnect();
+						_observe_group[index]?.disconnect();
 						_observe_group.splice(index, 1);
 
 						removedNode.querySelectorAll("*").forEach((childNode) => {
@@ -370,7 +370,7 @@ export default function flashCSS( PARA = {} ) {
 							const idDelete = childNode.flashID;
 							const index = _observe_group.findIndex(item => item.id === idDelete*1);
 	
-							_observe_group[index].disconnect();
+							_observe_group[index]?.disconnect();
 							_observe_group.splice(index, 1);
 						})
 					}	

@@ -25,7 +25,7 @@ A quick way to generate & customize css from html class name.
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.5.6.min.js"></script>
+<script src="assets/js/flashCSS-1.5.7.min.js"></script>
 ```
 or import js module.
 
@@ -40,7 +40,7 @@ import flashCSS from "html-flash-css";
 - Or
 ```html
 <script type="module">
-    import flashCSS from '/assets/js/flashCSS-1.5.6.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-1.5.7.module.min.js'
 </script>
 ```
 
