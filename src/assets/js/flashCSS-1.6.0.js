@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.5.7
- * 2023-10-24
+ * flashCSS 1.6.0
+ * 2023-10-27
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -185,6 +185,17 @@ function flashCSS( PARA = {} ) {
 		_para_symbol_string += symbol.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ((index===string.length-1) ? "" : "|");
 	})
 	let _para_symbol_reg = new RegExp("("+ _para_symbol_string +")", "g");
+
+
+	// Variable Para
+	let _para_variable = {
+		...PARA.setVariable
+	}
+	let _para_variable_string = "";
+	Object.keys(_para_variable).forEach(function(symbol,index,string){
+		_para_variable_string += "\\$" + symbol.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ((index===string.length-1) ? "" : "|");
+	})
+	let _para_variable_reg = new RegExp("("+ _para_variable_string +")", "g");		
 	
 
 	// Style Para
@@ -247,6 +258,7 @@ function flashCSS( PARA = {} ) {
 			_class_item_value = _class_item_value.replace(_para_symbol_reg,function(match, offset, string){
 				return (offset > 0 ? '' : '\\') + match;
 			});  
+			
 
 			// # for Style Value Replace
 			_style_item_value = _style_item_value.replace(_para_symbol_reg, function($0, $1) {
@@ -257,7 +269,15 @@ function flashCSS( PARA = {} ) {
 				let _rgb = _self.hexToRgb("#" + _hex);
 				_style_item_value = _style_item_value.replace("#" + _hex, _rgb.r + "," + _rgb.g + "," + _rgb.b )
 			}
-			
+
+
+			// # for Variable Replace
+			if(PARA.setVariable){
+				_style_item_value = _style_item_value.replace(_para_variable_reg, function($0, $1) {				
+					return _para_variable[$1.split('$')[1]];
+				});
+			}
+
 
 			// # for custom function for value
 			if (PARA.setCustomVal) {
@@ -547,6 +567,7 @@ function flashCSS( PARA = {} ) {
 
 	(PARA.observe === true) && this.observer();
 	(PARA.observeDOM === true) && this.observerDOM();
-	(PARA.showPara === true) && console.table(_para_spacing);
-	(PARA.showMedia === true) && console.table(_para_media);
+	(PARA.showPara === true) && console.log('showPara'); console.table(_para_spacing);
+	(PARA.showMedia === true) && console.log('showMedia'); console.table(_para_media);
+	(PARA.showVariable === true) && console.log('showVariable'); console.table(_para_variable);
 }

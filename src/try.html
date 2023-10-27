@@ -68,7 +68,7 @@
     <!-- End Main -->
 
     <!-- Start JS -->
-    <script src="assets/js/flashCSS-1.5.7.js"></script>
+    <script src="assets/js/flashCSS-1.6.0.js"></script>
     <script>
 
         window.addEventListener("DOMContentLoaded", function () {
@@ -77,6 +77,7 @@
                 target: ".wrapper",
                 showPara: true,
                 showMedia: true,
+                showVariable: true,
                 observe: true,
                 observeDOM: true,
                 important: false,
@@ -126,8 +127,14 @@
                     return _val;
                 },
                 setTemplate: {
-                    "img-abs": "ps-absolute at-0 al-0"
+                    "img-abs": "ps-absolute at-0 al-0",
+                    "bg-test": "bg-$main"
                 },
+                setVariable: {
+                    "main": 'blue',
+		            "danger": '#ff0000',
+                    "test": 'rgba(255,0,0,.5)'
+                }
             });
 
             // DEMO

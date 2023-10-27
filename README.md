@@ -25,7 +25,7 @@ A quick way to generate & customize css from html class name.
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.5.7.min.js"></script>
+<script src="assets/js/flashCSS-1.6.0.min.js"></script>
 ```
 or import js module.
 
@@ -40,7 +40,7 @@ import flashCSS from "html-flash-css";
 - Or
 ```html
 <script type="module">
-    import flashCSS from '/assets/js/flashCSS-1.5.7.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-1.6.0.module.min.js'
 </script>
 ```
 
@@ -103,14 +103,15 @@ export default App;
 ## Parameters
 ```javascript
 var css = new flashCSS({
-    target: "body",   // default
-    showPara: false,  // default
-    showMedia: false, // default
-    observe: false,   // default
-    observeDOM: false,// default
-    important: false, // default
-    style: "head",    // default
-    link: "-",        // default
+    target: "body",      // default
+    showPara: false,     // default
+    showMedia: false,    // default
+    showVariable: false, // default
+    observe: false,      // default
+    observeDOM: false,   // default
+    important: false,    // default
+    style: "head",       // default
+    link: "-",           // default
     setMedia: {
         xs: 0,    // default
         sm: 576,  // default
@@ -129,6 +130,12 @@ var css = new flashCSS({
     setTemplate: {
         "img-abs": "ps-absolute at-0 al-0"
     },
+    setVariable: {
+        "main": 'blue',
+        "primary": '#fd7e14',
+        "success": '#198754',
+        "danger": '#dc3545',
+    },
     setCustomVal: function( VAL ){
         // custom function here
         return VAL;
@@ -146,6 +153,9 @@ var css = new flashCSS({
 
 - ### `showMedia: Boolean` ###
 	Will show console table for media query setting.
+
+- ### `showVariable: Boolean` ###
+	Will show console table for variable setting.
 
 - ### `observe: Boolean` ###
 	If html class has changed which class will be update.
@@ -229,6 +239,28 @@ var css = new flashCSS({
 
 ## output class
 <div class="ps-absolute at-0 al-0"></div>
+```
+
+- ### `setVariable: Object` ###
+	You can create the custom variable as following example.
+```javascript
+var css = new flashCSS({
+    setVariable: {
+        "main": 'blue',
+        "primary": '#fd7e14',
+    },
+});
+```
+```html
+## input class
+<div class="bg-$main"></div>
+
+## output style
+<style>
+    .bg\-\$main{
+        background: blue;
+    }
+</style>
 ```
 
 - ### `setCustomVal: return style value` ###
