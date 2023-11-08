@@ -285,6 +285,7 @@ function flashCSS( PARA = {} ) {
 				let _classHead = _i.split(_class_link)[0];
 				let _styleItemName = _classHead.replace(_para_spacing_reg,function(match, offset, string){
 					_headMatch[_number] = true;
+			
 					return _para_spacing[match];
 				}); 
 				
@@ -436,18 +437,20 @@ function flashCSS( PARA = {} ) {
 
 				_INDEX.forEach(function(_i, _number){
 
-					(_string_group[_class_media[_number]]) || (_string_group[_class_media[_number]] = '');
+					_i.split(",").forEach(function(_j){
 
-					let _key = (_class_media[_number]) ? (_class_media[_number]) : ("origin");
-
-					// _string_group[_key] += (/before|after/).test(_pseudo_type[0]) ? ( "content: '';" ) : '';
-					_string_group[_key] += _i + ": " + _style_item_value[_number];
-					_string_group[_key] += ( (PARA.important) ? " !important;" : ";" );
-					
+						(_string_group[_class_media[_number]]) || (_string_group[_class_media[_number]] = '');
+	
+						let _key = (_class_media[_number]) ? (_class_media[_number]) : ("origin");
+	
+						// _string_group[_key] += (/before|after/).test(_pseudo_type[0]) ? ( "content: '';" ) : '';
+						_string_group[_key] += _j + ": " + _style_item_value[_number];
+						_string_group[_key] += ( (PARA.important) ? " !important;" : ";" );
+					})
+						
 				})
 
 			}
-			
 
 			//  # Class + Value
 			let _string_temp = {};
