@@ -1,6 +1,6 @@
 /*!
- * flashCSS 1.6.0
- * 2023-10-27
+ * flashCSS 2.0.0
+ * 2023-11-08
  * https://github.com/kymmax/flashCSS
  * 
  * @license Copyright 2023, flashCSS. All rights reserved.
@@ -11,10 +11,9 @@
 
 export default function flashCSS( PARA = {} ) {
 
-	let _self = this;
-
-	let _data_name = "css";
-	let _data_value = "flashCSS";
+	const _self = this;
+	const _data_name = "css";
+	const _data_value = "flashCSS";
 
 	// Media Query for Size
 	let _para_media = {
@@ -23,13 +22,12 @@ export default function flashCSS( PARA = {} ) {
 		md: 768,
 		lg: 992,
 		xl: 1280,
+		landscape: 'landscape',
+		portrait: 'portrait',
 		...PARA.setMedia // new for custom media
 	};
-	let _para_media_string = "";
-	Object.keys(_para_media).forEach(function(media,index,string){
-		_para_media_string += media + ((index===string.length-1) ? "" : "|");
-	})
-	let _para_media_reg = new RegExp("^("+ _para_media_string +")$", "g");
+	const _para_media_string = Object.keys(_para_media).join('|');
+	const _para_media_reg = new RegExp(`^(${_para_media_string})$`, "g");
 	
 
 	// Style Para
@@ -67,9 +65,9 @@ export default function flashCSS( PARA = {} ) {
 		"colGap": ["column-gap"],
 		"colSpan": ["column-span"],
 		"rowGap": ["row-gap"],
-		"g": ["gap"], // new
-		"placeContent": ["place-content"], // new
-		"placeItems": ["place-items"], // new
+		"g": ["gap"],
+		"placeContent": ["place-content"],
+		"placeItems": ["place-items"],
 		// Padding
 		"p" : ["padding"],
 		"pr": ["padding-right"],
@@ -127,7 +125,7 @@ export default function flashCSS( PARA = {} ) {
 		"tfStyle": ["transform-style"],
 		"tfOrigin": ["transform-origin"],
 		// Others
-		"float": ["float"], // new
+		"float": ["float"],
 		"o": ["opacity"],
 		"ov": ["overflow"],
 		"ws": ["white-space"],
@@ -138,10 +136,11 @@ export default function flashCSS( PARA = {} ) {
 		"ratio": ["aspect-ratio"],
 		"pointer": ["pointer-events"],
 		"cursor": ["cursor"],
-		"select": ["user-select"], // fix
+		"select": ["user-select"],
 		"va": ["vertical-align"],
 		"wm": ["writing-mode"],
-		...PARA.setStyle // new for custom style
+		"content": ["content"],
+		...PARA.setStyle
 	};
 
 	if(Array.isArray(PARA.deleteStyle)){
@@ -150,17 +149,14 @@ export default function flashCSS( PARA = {} ) {
 		})
 	}
 
-	let _para_spacing_string = "";
-	Object.keys( _para_spacing).forEach(function(item,index,string){
-		_para_spacing_string += item + ((index===string.length-1) ? "" : "|");
-	})
-	let _para_spacing_reg = new RegExp("^("+ _para_spacing_string +")$", "g");
+	const _para_spacing_string = Object.keys(_para_spacing).join("|");
+	const _para_spacing_reg = new RegExp("^(" + _para_spacing_string + ")$", "g");
 	
 
 	// Symbol Para
 	let _para_symbol = {
 		":": ":", // colon for pseudo type
-		"~": "~", // tilde for style value directly ( class name w/o space )
+		"~": "~", // tilde 
 		".": ".", // dot
 		"neg": "-", // negative
 		"@": "@", // at
@@ -175,34 +171,45 @@ export default function flashCSS( PARA = {} ) {
 		",": ",", // comma
 		"(": "(", // bracket - L
 		")": ")", // bracket - R
+		"{": "{", //  - L
+		"}": "}", //  - R
+		">": ">", //
+		"<": "<", //
+		"`": "`", //
+		";": ";", //
+		"'": "'", //
+		"|": "|", //
 		"/": "/", // slash
 		"?": "?", // search
 		"!": " !important", // exclamation for important
 		...PARA.setSymbol // new for custom symbol
 	}
-	let _para_symbol_string = "";
-	Object.keys(_para_symbol).forEach(function(symbol,index,string){
-		_para_symbol_string += symbol.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ((index===string.length-1) ? "" : "|");
-	})
-	let _para_symbol_reg = new RegExp("("+ _para_symbol_string +")", "g");
+	const _para_symbol_string = Object.keys(_para_symbol)
+		.map((symbol) => symbol.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+		.join("|");
+  	const _para_symbol_reg = new RegExp("(" + _para_symbol_string + ")", "g");
 
 
 	// Variable Para
 	let _para_variable = {
 		...PARA.setVariable
 	}
-	let _para_variable_string = "";
-	Object.keys(_para_variable).forEach(function(symbol,index,string){
-		_para_variable_string += "\\$" + symbol.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ((index===string.length-1) ? "" : "|");
-	})
-	let _para_variable_reg = new RegExp("("+ _para_variable_string +")", "g");		
-	
+	const _para_variable_string = Object.keys(_para_variable)
+		.map((symbol) => `\\$${symbol.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`)
+		.join('|');
+	const _para_variable_reg = new RegExp(`(${_para_variable_string})`, "g");	
+
+
+	// Pseudo Para
+	const _para_pseudo_double_reg = /(before|after|selection|first-letter|first-line)/;
+	const _para_pseudo_single_reg = /(nth-child\(\d+\)|nth-last-child\(\d+\)|first-child|last-child|hover|active|focus|checked|enabled|disabled|not|has|is|where)/;
+
 
 	// Style Para
-	let _class_link = (PARA.link) ? PARA.link : "-";  // (d-block, d-xl-block) (d-:block, d:xl:block)
+	const _class_link = (PARA.link) ? PARA.link : "-";  // (d-block, d-xl-block) (d-:block, d:xl:block)
 	let _style_list = "";
-	let _class_record = [];
-	let _group_media = {};
+	const _class_record = [];
+	const _group_media = {};
 	Object.keys(_para_media).forEach(function(item){
 		_group_media[item] = "";
 	})
@@ -216,124 +223,270 @@ export default function flashCSS( PARA = {} ) {
 			_class_string = _class_string.split(" ");
 
 		_class_string.forEach(function (i) { // get each class name
+
+			let _origin = i.replace(/\n/g, ""); // delete \n 
+			
+			if(_origin === '') return;			
+			
+			let _index = [_origin];
 			
 			// # for Class Head
 			let _class_head_match = false;
-			let _class_head = i.split(_class_link)[0];
-			let _style_item_name = _class_head.replace(_para_spacing_reg,function(match, offset, string){
-					_class_head_match = true;
-					return _para_spacing[match];
-				});  
-			
-			if(!_class_head_match) return;
 
-			/////////////////////////////////////////////////////
+			// # check with { } or not
+			let _bracket_before = '';
+			let _bracket_after = '';
+			let _bracket_match = _index[0].match(/\{([^}]+)\}/);
+			let _bracket_media = '';
+
+			if(_bracket_match){
+				let _inside_brackets = _bracket_match[1]; // get inner string
+				_index = _inside_brackets.split(";");
+
+				// # get bracket before & after
+				let _before_after_match = _origin.match(/^(.*?){[^}]+}(.*)$/m);
+				
+				if (_before_after_match){
+					_bracket_before = _before_after_match[1];
+					_bracket_after = _before_after_match[2];					
+				}
+
+				// # if bracket after with media
+				if(_bracket_after[0] === _class_link){
+					_bracket_media = _bracket_after.split(_class_link)[1];
+					_bracket_after = _bracket_after.split(_class_link)[2] || '';
+				}
+				
+			}
+			
+	
+			// # check para spacing & match or not
+			let _class_head = [];
+			let _style_item_name = [];
+			let _headMatch = [];
 
 			// # for Class Media
-			let _class_media_match = false;
-			let _class_second = i.split(_class_link)[1];
-			if(!_class_second) return;
-			let _class_media = _class_second.replace(_para_media_reg,function(match, offset, string){
-					_class_media_match = true;
+			let _class_media_match = [];	
+			let _class_second = [];
+			let _class_media = [];
+
+			// # for Class & Style Value
+			let _class_item_value = [];
+			let _style_item_value = [];
+
+
+			_index.forEach(function(_i, _number){
+
+				/////////////////////////////////////////////////////
+				// check para spacing & match or not
+
+				_headMatch[_number] = false;
+
+				let _classHead = _i.split(_class_link)[0];
+				let _styleItemName = _classHead.replace(_para_spacing_reg,function(match, offset, string){
+					_headMatch[_number] = true;
+					return _para_spacing[match];
+				}); 
+				
+				if(_headMatch.includes(false)) return;
+
+				_class_head.push(_classHead);
+				_style_item_name.push(_styleItemName);
+
+				/////////////////////////////////////////////////////
+				// Class Media
+
+				_class_media_match[_number] = false;
+
+				let _classSecond = _i.split(_class_link)[1];
+
+				if(!_classSecond) return;
+				let _classMedia = _classSecond.replace(_para_media_reg,function(match, offset, string){
+					_class_media_match[_number] = true;
 					return match;
-				}); 		
+				}); 
+				
+				_class_second.push(_classSecond);
+				// _class_media.push(_classMedia);
 
-			// # for Class Value
-			let _class_item_value;
-			let _style_item_value;
+				/////////////////////////////////////////////////////
+				// Class & Style Value
 
-			// # 包含 media str
-			if(_class_media_match){
-				_class_item_value = _style_item_value = i.split(_class_head+_class_link +_class_media+_class_link)[1];
-			}
-			// # not include  str
-			else{
-				_class_media = "";
-				_class_item_value = _style_item_value = i.split(_class_head+_class_link)[1];
-			}
+				// # 包含 media str
+				if(_class_media_match[_number]){
+					_class_media.push(_classMedia);
+					_class_item_value.push(_i.split(_class_head[_number]+_class_link +_class_media[_number]+_class_link)[1]);
+				}
+				// # not include  str
+				else{
+
+					_class_media.push((_para_media_reg.test(_bracket_media)) ? _bracket_media : 'origin');
+
+					_class_item_value.push(_i.split(_class_head[_number]+_class_link)[1]);
+				}
+
+				_style_item_value = [..._class_item_value];				
+
+			})
+		
+			if(_headMatch.includes(false)) return;
 
 			/////////////////////////////////////////////////////
 
 			// # for Class Value Name
-			_class_item_value = _class_item_value.replace(_para_symbol_reg,function(match, offset, string){
-				return (offset > 0 ? '' : '\\') + match;
-			});  
-			
+			_class_item_value = classValueName(_class_item_value);
+
+			function classValueName(_INDEX){
+
+				_INDEX.forEach(function(_i, _number){
+					_INDEX[_number] = _i.replace(_para_symbol_reg,function(match, offset, string){
+						return (offset > 0 ? '' : '\\') + match;
+					}); 
+				})
+				return _INDEX;
+			}
+
 
 			// # for Style Value Replace
-			_style_item_value = _style_item_value.replace(_para_symbol_reg, function($0, $1) {
-				return _para_symbol[$1];
-			});
-			if(_style_item_value.includes("rgba") && _style_item_value.includes("#")){
-				let _hex = _style_item_value.split("#")[1].substring(0,6);
-				let _rgb = _self.hexToRgb("#" + _hex);
-				_style_item_value = _style_item_value.replace("#" + _hex, _rgb.r + "," + _rgb.g + "," + _rgb.b )
-			}
+			let _pseudo = [];
+			let _pseudo_type = [];
+			_style_item_value = styleValueReplace(_style_item_value);
+
+			function styleValueReplace(_INDEX){
+
+				_INDEX.forEach(function(_i, _number){
+
+					let _this = _INDEX[_number];
+
+					// # replace symbol
+					_this = _i.replace(_para_symbol_reg, function($0, $1) {
+						return _para_symbol[$1];
+					});
+					
+
+					// # for RGBA
+					if(_i.includes("rgba") && _i.includes("#")){
+						let _hex = _this.split("#")[1].substring(0,6);
+						let _rgb = _self.hexToRgb("#" + _hex);
+						_this = _this.replace("#" + _hex, _rgb.r + "," + _rgb.g + "," + _rgb.b )
+					}
 
 
-			// # for Variable Replace
-			if(PARA.setVariable){
-				_style_item_value = _style_item_value.replace(_para_variable_reg, function($0, $1) {				
-					return _para_variable[$1.split('$')[1]];
-				});
-			}
+					// # for Variable Replace
+					if(PARA.setVariable){
+						_this = _this.replace(_para_variable_reg, function($0, $1) {				
+							return _para_variable[$1.split('$')[1]];
+						});
+					}
+					
+
+					// # for pseudo type
+					if (/:{2}/.test(_i)) { // Double :
+						_pseudo.push(true);
+						
+						let _pseudo_item = _this.split(_para_pseudo_double_reg);
+						let _type = _pseudo_item[0] + _pseudo_item[1];
+						_pseudo_type.push(_type);
+
+						_this = _this.split(_type + _class_link)[1];
+
+					} else if (/:/.test(_i)) { // Single :
+						_pseudo.push(true);
+
+						let _pseudo_item = _this.split(_para_pseudo_single_reg);
+						let _type = _pseudo_item[0] + _pseudo_item[1];
+						_pseudo_type.push(_type);
+
+						_this = _this.split(_type + _class_link)[1];
+					} else { // Without :
+						_pseudo.push(false);
+						_pseudo_type.push("");
+					}
 
 
-			// # for custom function for value
-			if (PARA.setCustomVal) {
-				_style_item_value = PARA.setCustomVal(_style_item_value);
-			}
+					// # for custom function for value
+					if (PARA.setCustomVal) {
+						_this = PARA.setCustomVal(_this);
+					}
+					
 
-
-			// # for style value directly ( class name w/o space)
-			if(_style_item_value.includes("~")){
-				_style_item_value = _style_item_value.replace("~","");
-			}
-
-
-			// # for pseudo type
-			let _pseudo = false,
-				_pseudo_type;
-			if(_style_item_value.includes(":")){
-				_pseudo = true;
-
-				let _pseudo_item = _style_item_value.split("-");
-				_pseudo_type = _pseudo_item[0].split(":")[1];
-
-
-				_style_item_value = _style_item_value.split(_pseudo_type + "-")[1];
+					return _INDEX[_number] = _this;
+				})
+				return _INDEX;
 			}
 
 			/////////////////////////////////////////////////////
 
 			// # Merge Class
-			let _class_string_merge = _class_head + ("\\"+_class_link) + (_class_media_match ? _class_media+("\\"+_class_link) : "") + _class_item_value; // final class name
+			let _class_string_merge = _origin.replace(_para_symbol_reg,function(match, offset, string){
+				return (offset > 0 ? '' : '\\') + match;
+			}); // final class name
 
+			
 			// Record Class Name
 			if(_class_record.includes(_class_string_merge)) return;
 			_class_record.push(_class_string_merge);
 
 
 			// Combine Style Value String
-			let _string_group = "";
-			_style_item_name.split(",").forEach(function(string){
-				_string_group += string+": " + _style_item_value + ( (PARA.important) ? " !important;" : ";" )
-			})
+			let _string_group = {};
+
+			combineStyleValue(_style_item_name)
+			function combineStyleValue(_INDEX){
+
+				_INDEX.forEach(function(_i, _number){
+
+					(_string_group[_class_media[_number]]) || (_string_group[_class_media[_number]] = '');
+
+					let _key = (_class_media[_number]) ? (_class_media[_number]) : ("origin");
+
+					// _string_group[_key] += (/before|after/).test(_pseudo_type[0]) ? ( "content: '';" ) : '';
+					_string_group[_key] += _i + ": " + _style_item_value[_number];
+					_string_group[_key] += ( (PARA.important) ? " !important;" : ";" );
+					
+				})
+
+			}
+			
 
 			//  # Class + Value
-			let _string_temp = '.' + _class_string_merge + ( _pseudo ? ':' + _pseudo_type : '' )  +'{' + _string_group + '} ';
+			let _string_temp = {};
+			Object.keys(_string_group).forEach(function(_i){
+
+				_string_temp[_i] = '';
+				_string_temp[_i] += '.' + _class_string_merge;		
+				_string_temp[_i] += (_pseudo[0]) ? (_pseudo_type[0]) : '';
+				_string_temp[_i] += (_bracket_before) ? (' ' + _bracket_before) : (_bracket_before);
+				_string_temp[_i] += (_bracket_after);
+				_string_temp[_i] += '{';
+
+				// let regex = /(before|after)/;
+				// _string_temp[_i] += (regex.test(_bracket_before) || regex.test(_bracket_after)) ? "content: '';" : '';
+				_string_temp[_i] += _string_group[_i];
+				_string_temp[_i] += '}';				
+				
+			})
 
 			// # Update
 			if(isUpdate) return _self.update(_class_media, _string_temp);
+	
 
-			// With Media String
-			if (_class_media_match) {
-				_group_media[_class_media] += _string_temp;
+			styleList();
+			function styleList(){
+
+				Object.keys(_string_temp).forEach(function(_i, _number){
+					
+					// Without Media String
+					if (_i === 'origin') {
+						_style_list += _string_temp[_i];						
+					}
+					// With Media String
+					else {
+						_group_media[_i] += _string_temp[_i];
+					}	
+				})				
+
 			}
-			// Without Media String
-			else {
-				_style_list += _string_temp;
-			}		
 				
 		});
 	}
@@ -394,11 +547,6 @@ export default function flashCSS( PARA = {} ) {
 							_observe_group.splice(index, 1);
 						})
 					}	
-
-					// console.log("removedNode:",removedNode);
-					
-					
-
 				});
 			  }
 			});
@@ -433,23 +581,39 @@ export default function flashCSS( PARA = {} ) {
 		observer.observe(_target_container, { childList: true, subtree: true});
 	}
 
+
 	// Set Media Query
 	this.addMedia = function(){
 
 		// Add & Order Media Style
 		Object.keys(_group_media).forEach(function(media){			
-			_style_list += '@media (min-width:' + _para_media[media] + 'px) {' + _group_media[media] + '} ';
+
+			switch (true) {
+				case (media === 'landscape' || media === 'portrait'):
+					_style_list += '@media (orientation:' + _para_media[media] + ') {' + _group_media[media] + '} ';
+					break;
+				default:
+					_style_list += '@media (min-width:' + _para_media[media] + 'px) {' + _group_media[media] + '} ';
+					break;
+			}
 		})
 	}
 
 	// Set Update
 	this.update = function( MEDIA , CLASS_NAME ){
+		
+		const _style_tag = document.querySelectorAll(`style[data-${_data_name}=${_data_value}]`)[0];
 
-		let _style_tag = document.querySelectorAll(`style[data-${_data_name}=${_data_value}]`)[0];
-		let _style_content = _style_tag.textContent.split( _para_media[MEDIA] + "px) {");
+		Object.keys(CLASS_NAME).forEach(function(_media){
+			
+			let _style_content = _style_tag.textContent.split( _para_media[_media] + "px) {");		
 
-		if(MEDIA){ _style_tag.textContent =  _style_content[0] + _para_media[MEDIA] + "px) {" + CLASS_NAME + _style_content[1];}
-		else{ _style_tag.textContent = [ CLASS_NAME, _style_tag.textContent ].join(" ");}
+			if(_media !== 'origin'){ _style_tag.textContent =  _style_content[0] + _para_media[_media] + "px) {" + CLASS_NAME[_media] + _style_content[1];}
+			else{ _style_tag.textContent = [ CLASS_NAME[_media], _style_tag.textContent ].join(" ");}
+
+			console.log("IN");
+			
+		})
 
 		// On completed
 		if (PARA.onCompleted) PARA.onCompleted();
@@ -461,12 +625,12 @@ export default function flashCSS( PARA = {} ) {
 		// check multiple ?
 		if(document.querySelector(`[data-${_data_name}=${_data_value}]`)) return;
 	
-		let _style = document.createElement('style');
+		const _style = document.createElement('style');
 			_style.type = 'text/css';
 			_style.setAttribute(`data-${_data_name}`, _data_value);
 			_style.appendChild(document.createTextNode(_style_list));
 		
-		let _head_tag = document.getElementsByTagName( ( PARA.style ? PARA.style : 'head' ) )[0];
+		const _head_tag = document.getElementsByTagName( ( PARA.style ? PARA.style : 'head' ) )[0];
 			_head_tag.appendChild(_style);
 
 		// On completed
@@ -566,8 +730,8 @@ export default function flashCSS( PARA = {} ) {
 	this.addTag();
 
 	(PARA.observe === true) && this.observer();
-	(PARA.observeDOM === true) && this.observerDOM();
-	(PARA.showPara === true) && console.log('showPara'); console.table(_para_spacing);
-	(PARA.showMedia === true) && console.log('showMedia'); console.table(_para_media);
-	(PARA.showVariable === true) && console.log('showVariable'); console.table(_para_variable);
+	(PARA.observeDOM === true) && this.observerDOM();	
+	(PARA.showPara === true) && console.table(_para_spacing);
+	(PARA.showMedia === true) && console.table(_para_media);
+	(PARA.showVariable === true) && console.table(_para_variable);
 }

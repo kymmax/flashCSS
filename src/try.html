@@ -62,22 +62,23 @@
                 <label for="input" class="d-block color-white fz-24px mb-1rem">↓↓ Try & Enter Here ↓↓</label>
                 <input id="input" type="text" class="w-80% mx-auto px-10px fz-24px fh-3rem" placeholder="w-100% bg-gray color-white p-3rem">
             </div>
+
         </div>
 
     </div>
     <!-- End Main -->
 
     <!-- Start JS -->
-    <script src="assets/js/flashCSS-1.6.0.js"></script>
+    <script src="assets/js/flashCSS-2.0.0.js"></script>
     <script>
 
         window.addEventListener("DOMContentLoaded", function () {
             // INIT flashCSS
             var css = new flashCSS({
                 target: ".wrapper",
-                showPara: true,
-                showMedia: true,
-                showVariable: true,
+                showPara: false,
+                showMedia: false,
+                showVariable: false,
                 observe: true,
                 observeDOM: true,
                 important: false,
@@ -142,7 +143,7 @@
                 return document.getElementById(ID);
             }
             
-            _("input").addEventListener("change",function (para) {
+            _("input")?.addEventListener("change",function (para) {
                 _("demo_1").setAttribute("class",para.target.value);
 
                 // css.reInit();

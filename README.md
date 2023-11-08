@@ -3,6 +3,7 @@
 [![NPM Package](https://img.shields.io/npm/v/html-flash-css?color=orange)](https://www.npmjs.com/package/html-flash-css)
 [![Build Size](https://img.shields.io/bundlephobia/min/html-flash-css)](https://bundlephobia.com/package/html-flash-css)
 [![NPM Downloads](https://img.shields.io/npm/dt/html-flash-css?color=purple)](https://npmtrends.com/html-flash-css)
+[![CDN](https://data.jsdelivr.com/v1/package/npm/html-flash-css/badge)](https://www.jsdelivr.com/package/npm/html-flash-css)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 A quick way to generate & customize css from html class name.
@@ -18,14 +19,14 @@ A quick way to generate & customize css from html class name.
 - More freedom to use.
 - More custom parameter to set.
 - Add one JS file only.
-- Min JS size `~7 KB` only.
+- Min JS size `~9 KB` only.
 - Save more CSS file size.
 - Support React, and any class change with frameworks.
 
 ## How to Use?
 1. Add js.
 ```html
-<script src="assets/js/flashCSS-1.6.0.min.js"></script>
+<script src="assets/js/flashCSS-2.0.0.min.js"></script>
 ```
 or import js module.
 
@@ -40,18 +41,23 @@ import flashCSS from "html-flash-css";
 - Or
 ```html
 <script type="module">
-    import flashCSS from '/assets/js/flashCSS-1.6.0.module.min.js'
+    import flashCSS from '/assets/js/flashCSS-2.0.0.module.min.js'
 </script>
 ```
 
-2. Execute function when document ready.
+- By CDN
+- ```html
+<script src="https://cdn.jsdelivr.net/npm/html-flash-css@1.6.0/src/assets/js/flashCSS-2.0.0.min.js"></script>
+```
+
+1. Execute function when document ready.
 ```javascript
 window.addEventListener("DOMContentLoaded", function () {
     var css = new flashCSS();
 });
 ```
 
-3. Start your project!
+1. Start your project!
 (width: 25%; height: 200px; margin-top: 1rem; background-color: black)
 ```html
 <div class="w-25% h-200px mt-1rem bgc-black"></div>
@@ -118,6 +124,8 @@ var css = new flashCSS({
         md: 768,  // default
         lg: 992,  // default
         xl: 1280, // default
+        landscape: 'landscape', // default
+		portrait: 'portrait',   // default
     },
     setStyle: {
         "box": ["box-sizing"],
@@ -171,18 +179,19 @@ var css = new flashCSS({
 	You can change it for `body` or `html`.
 
 - ### `link: String (class link)` ###
-	You can change class name dash from `-` to `# $ ^ & * +`, and other symbols.
-    (Can't use `@`, `=`, `:`, `~` now.)
+	You can change class name dash from `-` to `# ^ & * |`, and other symbols.
+    (Can't use `@`, `=`, `:`, `~`, `$`, `+` now.)
 ```html
 ## -
 <div class="d-block d-xl-none"></div>
 ## :
-<div class="d:block d:xl:none"></div>
+<div class="d|block d|xl|none"></div>
 ```
 
-- ### `setMedia: Object ( {xs: number, sm: number, md: number, lg: number, xl: number} )` ###
-	Related to CSS @media (min-width: px), and value just like Bootstrap.
+- ### `setMedia: Object ( {xs: number, sm: number, md: number, lg: number, xl: number, landscape: landscape, portrait: portrait} )` ###
+	- Related to CSS @media (min-width: px), and value just like Bootstrap.
     You also can add additional value for yourself.
+    - New feature for `orientation` on `landscape` & `portrait`.
 ```javascript
 var css = new flashCSS({
     setMedia: {
@@ -424,6 +433,7 @@ var css = new flashCSS({
     "select": ["user-select"],
     "va": ["vertical-align"],
     "wm": ["writing-mode"],
+    "content": ["content"],
 };
 ```
 
@@ -432,7 +442,7 @@ var css = new flashCSS({
 ```javascript
 {
     ":": ":", // colon for pseudo type
-    "~": "~", // tilde for style value directly ( class name w/o space )
+    "~": "~", // tilde 
     ".": ".", // dot
     "neg": "-", // negative
     "@": "@", // at
@@ -447,6 +457,14 @@ var css = new flashCSS({
     ",": ",", // comma
     "(": "(", // bracket - L
     ")": ")", // bracket - R
+    "{": "{", //  - L
+    "}": "}", //  - R
+    ">": ">", //
+    "<": "<", //
+    "`": "`", //
+    ";": ";", //
+    "'": "'", //
+    "|": "|", //
     "/": "/", // slash
     "?": "?", // search
     "!": " !important", // exclamation for important
@@ -457,10 +475,6 @@ var css = new flashCSS({
     // pseudo type
     <div class="tf-:hover-scale(1.1)"></div>
     <div class="bg-:active-red"></div>
-
-## Tilde 
-    // write style value directly ( class name w/o space )
-    <div class="bg-~linear-gradient(180deg,rgba(245,131,49,1)0%,rgba(121,55,40,1)100%)"></div>
 
 ## Dot
     // width: 50.5px;
@@ -513,6 +527,180 @@ var css = new flashCSS({
     // align-items: center;
     <div class="alignItems-center"></div>
 ```
+
+- ### `Pseudo` ###
+You can use `:` & `::` to create pseudo style by following avalible parameter.
+
+```javascript
+    const _para_pseudo_double_reg = /(before|after|selection|first-letter|first-line)/;
+	const _para_pseudo_single_reg = /(nth-child\(\d+\)|nth-last-child\(\d+\)|first-child|last-child|hover|active|focus|checked|enabled|disabled|not|has|is|where)/;
+```
+
+```html
+## example: 1 
+<div class="bg-:active-red"></div>
+
+## output style
+<style>
+    .bg-\:active-red:active{
+        background: red ;
+    }
+</style>
+
+## example: 2
+<div class="content-::before-'flash'"></div>
+
+## output style
+<style>
+    .content-\:\:before-\'flash\'::before{
+        content: 'flash' ;
+    }
+</style>
+
+## example: 3
+<div class="color-:first-child-red"></div>
+
+## output style
+<style>
+    .color-\:first-child-red:first-child{
+        color: red ;
+    }
+</style>
+```
+
+- ### `Class Group: Media + Self & Child` ###
+You can customize the styles for self and child element by `child{}` and `{}self`.
+For media example will be `child{}-media` and `{}-media-self`
+Can't use this method as `child{}self`.
+
+```html
+## example: 1 (style for Self)
+<div class="{bg-white;color-black}"></div>
+
+## output style
+<style>
+    .\{bg-white\;color-black\}{
+        background: white ;
+        color: black ;
+    }
+</style>
+
+## example: 2 (style for Self with class)
+<div class="{bg-white;color-black}.active"></div>
+
+## output style
+<style>
+    .\{bg-white\;color-black\}\.active.active{
+        background: white ;
+        color: black ;
+    }
+</style>
+
+## example: 3 (style for Self with pseudo)
+<div class="{bg-white;color-black}:hover"></div>
+
+## output style
+<style>
+    .\{bg-white\;color-black\}\:hover:hover{
+        background: white ;
+        color: black ;
+    }
+</style>
+
+## example: 4 (style for Child)
+<ul class="li{bg-white;color-black}">
+    <li>list-1</li>
+    <li>list-2</li>
+</ul>
+<ul class=">li{bg-white;color-black}">
+    <li>list-1</li>
+    <li>list-2</li>
+</ul>
+
+## output style
+<style>
+    .li\{bg-white\;color-black\} li{
+        background: white ;
+        color: black ;
+    }
+    .\>li\{bg-white\;color-black\} >li{
+        background: white ;
+        color: black ;
+    }
+</style>
+
+## example: 5 (style for Child with class)
+<ul class="li.sp{bg-white;color-black}">
+    <li>list-1</li>
+    <li class="sp">list-2</li>
+</ul>
+
+## output style
+<style>
+    .li\.sp\{bg-white\;color-black\} li.sp{
+        background: white ;
+        color: black ;
+    }
+</style>
+
+## example: 6 (style for Child with pseudo)
+<ul class="li:hover{bg-white;color-black}">
+    <li>list-1</li>
+    <li>list-2</li>
+</ul>
+
+## output style
+<style>
+    .li\:hover\{bg-white\;color-black\} li:hover{
+        background: white ;
+        color: black ;
+    }
+</style>
+
+## example: 7 (style for self with media)
+<div class="{bg-white;color-black}-sm"></div>
+
+## output style
+<style>
+    @media (min-width:576px) {
+        .\{bg-white\;color-black\}-sm{
+            background: white ;
+            color: black ;
+        }
+    }
+</style>
+
+## example: 8 (style for self with media)
+<div class="{bg-white;color-black}-sm-:hover"></div>
+
+## output style
+<style>
+    @media (min-width:576px) {
+        .\{bg-white\;color-black\}-sm-\:hover:hover{
+            background: white ;
+            color: black ;
+        }
+    }
+</style>
+
+## example: 9 (style for child with media)
+<ul class="li{bg-white;color-black}-sm">
+    <li>list-1</li>
+    <li>list-2</li>
+</ul>
+
+## output style
+<style>
+    @media (min-width:200px) {
+        .li\{bg-white\;color-black\}-sm li{
+            background: white ;
+            color: black ;
+        }
+    }
+</style>
+```
+
+
 
 - ### `refresh()` ###
 You can use `refresh()` to re-check whole html class name to generate css style.
