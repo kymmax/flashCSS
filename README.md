@@ -46,18 +46,18 @@ import flashCSS from "html-flash-css";
 ```
 
 - By CDN
-- ```html
+```html
 <script src="https://cdn.jsdelivr.net/npm/html-flash-css@1.6.0/src/assets/js/flashCSS-2.0.0.min.js"></script>
 ```
 
-1. Execute function when document ready.
+2. Execute function when document ready.
 ```javascript
 window.addEventListener("DOMContentLoaded", function () {
     var css = new flashCSS();
 });
 ```
 
-1. Start your project!
+3. Start your project!
 (width: 25%; height: 200px; margin-top: 1rem; background-color: black)
 ```html
 <div class="w-25% h-200px mt-1rem bgc-black"></div>
