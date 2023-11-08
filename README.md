@@ -532,8 +532,8 @@ var css = new flashCSS({
 You can use `:` & `::` to create pseudo style by following avalible parameter.
 
 ```javascript
-    const _para_pseudo_double_reg = /(before|after|selection|first-letter|first-line)/;
-	const _para_pseudo_single_reg = /(nth-child\(\d+\)|nth-last-child\(\d+\)|first-child|last-child|hover|active|focus|checked|enabled|disabled|not|has|is|where)/;
+const _para_pseudo_double_reg = /(before|after|selection|first-letter|first-line)/;
+const _para_pseudo_single_reg = /(nth-child\(\d+\)|nth-last-child\(\d+\)|first-child|last-child|hover|active|focus|checked|enabled|disabled|not|has|is|where)/;
 ```
 
 ```html
