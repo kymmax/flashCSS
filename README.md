@@ -47,7 +47,7 @@ import flashCSS from "html-flash-css";
 
 - By CDN
 ```html
-<script src="https://cdn.jsdelivr.net/npm/html-flash-css@1.6.0/src/assets/js/flashCSS-2.0.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html-flash-css@2.0.0/src/assets/js/flashCSS-2.0.0.min.js"></script>
 ```
 
 2. Execute function when document ready.
